@@ -3,6 +3,7 @@ package test;
 import static org.junit.Assert.assertEquals;
 
 import java.text.ParseException;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,8 +13,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import entities.Account;
 import entities.Address;
+import entities.User;
 
 public class AddressTest {
 	  private EntityManagerFactory emf;
@@ -35,6 +36,9 @@ public class AddressTest {
 	        assertEquals("CO", a.getState());
 	        assertEquals(12345, a.getZip());
 	        assertEquals(1234567, a.getPhone());
+	        
+	        List<User> users = a.getUsers(); 
+	        assertEquals(1, users.size());
 	      
 	    }
 

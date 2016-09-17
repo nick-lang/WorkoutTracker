@@ -1,10 +1,12 @@
 package entities;
 
-import javax.persistence.Column;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Address {
@@ -12,6 +14,10 @@ public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@OneToMany(mappedBy="address")
+	private List<User> users;
+	
 	private String address;
 	private String address2;
 	private String city;
@@ -19,6 +25,12 @@ public class Address {
 	private int zip;
 	private int phone;
 	
+	public List<User> getUsers() {
+		return users;
+	}
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
 	public String getAddress() {
 		return address;
 	}

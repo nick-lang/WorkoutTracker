@@ -12,11 +12,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import entities.Account;
-import entities.Address;
-import entities.User;
+import entities.Category;
 
-public class UserTest {
+public class CategoryTest {
 	  private EntityManagerFactory emf;
 	    private EntityManager em;
 
@@ -28,17 +26,17 @@ public class UserTest {
 
 	    @Test
 	    public void test() throws ParseException {
-	        User user = em.find(User.class, 1);
-	        assertEquals((Double)23.08, user.getBmi());
-	        assertEquals("nick", user.getFirstName());
-	        assertEquals("lang", user.getLastName());
-	        assertEquals(27, user.getAge());
-	        assertEquals("thisistotallyanemail", user.getEmail());
+	        Category caty = em.find(Category.class, 1);
+	        assertEquals(1, caty.getId());
+	        assertEquals("weights", caty.getCategoryName());
+	        assertEquals(false, caty.getDistance());
+	        assertEquals(true, caty.getWeight());
+	        assertEquals(false, caty.getIncline());
+	        assertEquals(false, caty.getLevel());
+	        assertEquals(false, caty.getPace());
+	        assertEquals(true, caty.getReps());
+	        assertEquals(false, caty.getTime());
 	      
-	        Address a = user.getAddress();
-	        assertEquals(1, a.getId());
-	        Account acc = user.getAccount();
-	        assertEquals(1, acc.getId());
 	    }
 
 	    @After

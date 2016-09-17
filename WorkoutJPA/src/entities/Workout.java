@@ -13,45 +13,19 @@ public class Workout {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name = "category_id")
-	private int categoryId;
+	private String name;
 
+	private String description;
+	
 	@Column(name = "user_association")
 	private Integer userAssociation;
 
-	@Column(name = "exercise_name")
-	private String exerciseName;
-
-	private String description;
-
-	@Column(name = "video_url")
-	private String videoURL;
-
-	@Column(name = "image_url")
-	private String imageURL;
-
-	public int getCategoryId() {
-		return categoryId;
+	public String getName() {
+		return name;
 	}
 
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public Integer getUserAssociation() {
-		return userAssociation;
-	}
-
-	public void setUserAssociation(Integer userAssociation) {
-		this.userAssociation = userAssociation;
-	}
-
-	public String getExerciseName() {
-		return exerciseName;
-	}
-
-	public void setExerciseName(String exerciseName) {
-		this.exerciseName = exerciseName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
@@ -62,20 +36,12 @@ public class Workout {
 		this.description = description;
 	}
 
-	public String getVideoURL() {
-		return videoURL;
+	public Integer getUserAssociation() {
+		return userAssociation;
 	}
 
-	public void setVideoURL(String videoURL) {
-		this.videoURL = videoURL;
-	}
-
-	public String getImageURL() {
-		return imageURL;
-	}
-
-	public void setImageURL(String imageURL) {
-		this.imageURL = imageURL;
+	public void setUserAssociation(Integer userAssociation) {
+		this.userAssociation = userAssociation;
 	}
 
 	public int getId() {
@@ -84,9 +50,8 @@ public class Workout {
 
 	@Override
 	public String toString() {
-		return "Exercise [id=" + id + ", categoryId=" + categoryId + ", userAssociation=" + userAssociation
-				+ ", exerciseName=" + exerciseName + ", description=" + description + ", videoURL=" + videoURL
-				+ ", imageURL=" + imageURL + "]";
+		return "Workout [id=" + id + ", name=" + name + ", description=" + description + ", userAssociation="
+				+ userAssociation + "]";
 	}
 
 }

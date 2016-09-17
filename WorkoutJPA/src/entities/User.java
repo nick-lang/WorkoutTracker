@@ -5,14 +5,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "account_id")
+	@Column(name="account_id")
 	private int accountId;
+	
+	@OneToOne
+	@JoinColumn(name = "account_id")
+	private Account account;
+	
 	private char gender;
 	private Double height;
 	private Double weight;
@@ -23,8 +31,22 @@ public class User {
 	private String lastName;
 	private int age;
 	private String email;
-	@Column(name = "address_id")
-	private int addressId;
+	
+	@ManyToOne
+	@JoinColumn(name="address_id")
+	private Address address;
+	
+	public Account getAccount() {
+		return account;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
 	public char getGender() {
 		return gender;
@@ -91,23 +113,12 @@ public class User {
 		this.email = email;
 	}
 
-	public int getAddressId() {
-		return addressId;
-	}
-
-	public void setAddressId(int addressId) {
-		this.addressId = addressId;
-	}
-
-	public int getAccountId() {
-		return accountId;
-	}
-
 	@Override
 	public String toString() {
-		return "User [accountId=" + accountId + ", gender=" + gender + ", height=" + height + ", weight=" + weight
+		return "User [account=" + account + ", gender=" + gender + ", height=" + height + ", weight=" + weight
 				+ ", bmi=" + bmi + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + ", email="
-				+ email + ", addressId=" + addressId + "]";
+				+ email + ", address=" + address + "]";
 	}
 
+	
 }
