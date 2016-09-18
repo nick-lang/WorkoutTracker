@@ -1,10 +1,13 @@
 package entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Category {
@@ -15,6 +18,9 @@ public class Category {
 	
 	@Column(name="category_name")
 	private String categoryName;
+	
+	@OneToMany(mappedBy="category")
+	private List<Exercise> exercises;
 	
 	private Boolean reps;
 
@@ -29,6 +35,14 @@ public class Category {
 	private Boolean incline;
 	
 	private Boolean level;
+
+	public List<Exercise> getExercises() {
+		return exercises;
+	}
+
+	public void setExercises(List<Exercise> exercises) {
+		this.exercises = exercises;
+	}
 
 	public Boolean getWeight() {
 		return weight;

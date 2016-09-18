@@ -7,58 +7,73 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="workout_definition")
-public class WorkoutDefinition {
-	
+@Table(name = "workout_definition")
+public class WorkoutDefinition{
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="workout_id")
-	private int workoutId;
+	private int id;
 	
-	@Column(name="exercise_id")
-	private int exerciseId;
-	
+	@ManyToOne
+	@JoinColumn(name = "workout_id")
+	private Workout workout;
+
+	@ManyToOne
+	@JoinColumn(name = "exercise_id")
+	private Exercise exercise;
+
+	public Exercise getExercise() {
+		return exercise;
+	}
+
+	public void setExercise(Exercise exercise) {
+		this.exercise = exercise;
+	}
+
 	private int set;
-	
+
 	private Date date;
-	
-	@Column(name="user_association")
-	private int userAssociation;
-	
-	@Column(name="exercise_ordinal")
+
+	@ManyToOne
+	@JoinColumn(name = "account_association")
+	private Account account;
+
+	@Column(name = "exercise_ordinal")
 	private Integer exerciseOrdinal;
 
 	private Integer weight;
-	
+
 	private Integer reps;
-	
+
 	private Integer level;
-	
+
 	private Double time;
-	
+
 	private Double pace;
-	
+
 	private Double distance;
-	
+
 	private Double incline;
 
-	public int getWorkoutId() {
-		return workoutId;
+	public Workout getWorkout() {
+		return workout;
 	}
 
-	public void setWorkoutId(int workoutId) {
-		this.workoutId = workoutId;
+	public void setWorkout(Workout workout) {
+		this.workout = workout;
 	}
 
-	public int getExerciseId() {
-		return exerciseId;
+	public Account getAccount() {
+		return account;
 	}
 
-	public void setExerciseId(int exerciseId) {
-		this.exerciseId = exerciseId;
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
 	public int getSet() {
@@ -75,14 +90,6 @@ public class WorkoutDefinition {
 
 	public void setDate(Date date) {
 		this.date = date;
-	}
-
-	public int getUserAssociation() {
-		return userAssociation;
-	}
-
-	public void setUserAssociation(int userAssociation) {
-		this.userAssociation = userAssociation;
 	}
 
 	public Integer getExerciseOrdinal() {
@@ -149,12 +156,14 @@ public class WorkoutDefinition {
 		this.incline = incline;
 	}
 
-	@Override
-	public String toString() {
-		return "WorkoutDefinition [workoutId=" + workoutId + ", exerciseId=" + exerciseId + ", set=" + set + ", date="
-				+ date + ", userAssociation=" + userAssociation + ", exerciseOrdinal=" + exerciseOrdinal + ", weight="
-				+ weight + ", reps=" + reps + ", level=" + level + ", time=" + time + ", pace=" + pace + ", distance="
-				+ distance + ", incline=" + incline + "]";
-	}
-	
+	// @Override
+	// public String toString() {
+	// return "WorkoutDefinition [workoutId=" + workoutId + ", exerciseId=" +
+	// exerciseId + ", set=" + set + ", date="
+	// + date + ", exerciseOrdinal=" + exerciseOrdinal + ", weight="
+	// + weight + ", reps=" + reps + ", level=" + level + ", time=" + time + ",
+	// pace=" + pace + ", distance="
+	// + distance + ", incline=" + incline + "]";
+	// }
+
 }

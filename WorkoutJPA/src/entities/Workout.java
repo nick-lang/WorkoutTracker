@@ -1,10 +1,12 @@
 package entities;
 
-import javax.persistence.Column;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Workout {
@@ -17,8 +19,16 @@ public class Workout {
 
 	private String description;
 	
-	@Column(name = "user_association")
-	private Integer userAssociation;
+	@OneToMany(mappedBy="workout")
+	private List<WorkoutDefinition> workoutDefinitions;
+
+	public List<WorkoutDefinition> getWorkoutDefinitions() {
+		return workoutDefinitions;
+	}
+
+	public void setWorkoutDefinitions(List<WorkoutDefinition> workoutDefinitions) {
+		this.workoutDefinitions = workoutDefinitions;
+	}
 
 	public String getName() {
 		return name;
@@ -36,22 +46,13 @@ public class Workout {
 		this.description = description;
 	}
 
-	public Integer getUserAssociation() {
-		return userAssociation;
-	}
-
-	public void setUserAssociation(Integer userAssociation) {
-		this.userAssociation = userAssociation;
-	}
-
 	public int getId() {
 		return id;
 	}
 
 	@Override
 	public String toString() {
-		return "Workout [id=" + id + ", name=" + name + ", description=" + description + ", userAssociation="
-				+ userAssociation + "]";
+		return "Workout [id=" + id + ", name=" + name + ", description=" + description + "]";
 	}
 
 }

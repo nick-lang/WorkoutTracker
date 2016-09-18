@@ -1,8 +1,9 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.text.ParseException;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,7 +13,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import entities.Category;
 import entities.Exercise;
+import entities.WorkoutDefinition;
 
 public class ExerciseTest {
 	  private EntityManagerFactory emf;
@@ -28,12 +31,16 @@ public class ExerciseTest {
 	    public void test() throws ParseException {
 	        Exercise e = em.find(Exercise.class, 1);
 	        assertEquals(1, e.getId());
-	        assertEquals(1, e.getCategoryId());
 	        assertEquals("The best exercise ever", e.getDescription());
 	        assertEquals("deadlift", e.getExerciseName());
 	        assertEquals(null, e.getImageURL());
 	        assertEquals(null, e.getVideoURL());
-	        assertEquals(null, e.getUserAssociation());
+	        
+	        List<WorkoutDefinition> ws = e.getWorkoutDefinitions();
+	        assertEquals(3, ws.size());
+	        
+	        Category cat = e.getCategory();
+	        assertEquals(1, cat.getId());
 	   
 	    }
 

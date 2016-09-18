@@ -3,6 +3,7 @@ package test;
 import static org.junit.Assert.assertEquals;
 
 import java.text.ParseException;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,8 +13,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import entities.Account;
 import entities.Workout;
+import entities.WorkoutDefinition;
 
 public class WorkoutTest {
 	  private EntityManagerFactory emf;
@@ -31,7 +32,11 @@ public class WorkoutTest {
 	        assertEquals(1, workout.getId());
 	        assertEquals("Strength", workout.getName());
 	        assertEquals(null, workout.getDescription());
-	        assertEquals((Integer)1, workout.getUserAssociation());
+	    
+	        List<WorkoutDefinition> ws = workout.getWorkoutDefinitions();
+	        assertEquals(23, ws.size());
+
+	        
 	      
 	    }
 

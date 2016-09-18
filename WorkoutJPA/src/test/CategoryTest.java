@@ -3,6 +3,7 @@ package test;
 import static org.junit.Assert.assertEquals;
 
 import java.text.ParseException;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import entities.Category;
+import entities.Exercise;
 
 public class CategoryTest {
 	  private EntityManagerFactory emf;
@@ -36,6 +38,9 @@ public class CategoryTest {
 	        assertEquals(false, caty.getPace());
 	        assertEquals(true, caty.getReps());
 	        assertEquals(false, caty.getTime());
+	        
+	        List<Exercise> es = caty.getExercises();
+	        assertEquals(4, es.size());
 	      
 	    }
 

@@ -1,10 +1,15 @@
 package entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Exercise {
@@ -13,11 +18,12 @@ public class Exercise {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name = "category_id")
-	private int categoryId;
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
 
-	@Column(name = "user_association")
-	private Integer userAssociation;
+	@OneToMany(mappedBy="exercise")
+	private List<WorkoutDefinition> workoutDefinitions;
 
 	@Column(name = "exercise_name")
 	private String exerciseName;
@@ -30,20 +36,20 @@ public class Exercise {
 	@Column(name = "image_url")
 	private String imageURL;
 
-	public int getCategoryId() {
-		return categoryId;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
-	public Integer getUserAssociation() {
-		return userAssociation;
+	public List<WorkoutDefinition> getWorkoutDefinitions() {
+		return workoutDefinitions;
 	}
 
-	public void setUserAssociation(Integer userAssociation) {
-		this.userAssociation = userAssociation;
+	public void setWorkoutDefinitions(List<WorkoutDefinition> workoutDefinitions) {
+		this.workoutDefinitions = workoutDefinitions;
 	}
 
 	public String getExerciseName() {
@@ -82,11 +88,11 @@ public class Exercise {
 		return id;
 	}
 
-	@Override
-	public String toString() {
-		return "Exercise [id=" + id + ", categoryId=" + categoryId + ", userAssociation=" + userAssociation
-				+ ", exerciseName=" + exerciseName + ", description=" + description + ", videoURL=" + videoURL
-				+ ", imageURL=" + imageURL + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Exercise [id=" + id + ", categoryId=" + categoryId + ", account=" + account + ", exerciseName="
+//				+ exerciseName + ", description=" + description + ", videoURL=" + videoURL + ", imageURL=" + imageURL
+//				+ "]";
+//	}
 
 }

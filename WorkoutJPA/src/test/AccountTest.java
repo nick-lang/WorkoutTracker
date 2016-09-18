@@ -3,6 +3,7 @@ package test;
 import static org.junit.Assert.assertEquals;
 
 import java.text.ParseException;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,6 +14,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import entities.Account;
+import entities.User;
+import entities.WorkoutDefinition;
 
 public class AccountTest {
 	  private EntityManagerFactory emf;
@@ -26,9 +29,15 @@ public class AccountTest {
 
 	    @Test
 	    public void test() throws ParseException {
-	        Account user = em.find(Account.class, 1);
-	        assertEquals("admin", user.getUsername());
-	        assertEquals("admin", user.getPassword());
+	        Account acc = em.find(Account.class, 1);
+	        assertEquals("admin", acc.getUsername());
+	        assertEquals("admin", acc.getPassword());
+	        
+	        User user = acc.getUser();
+	        assertEquals((Double)23.08, user.getBmi());
+	        
+	        List<WorkoutDefinition> wds = acc.getWorkoutDefinitions();
+	        assertEquals(23, wds.size());
 	      
 	    }
 

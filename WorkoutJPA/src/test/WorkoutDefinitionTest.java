@@ -14,6 +14,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import entities.Account;
+import entities.Exercise;
+import entities.Workout;
 import entities.WorkoutDefinition;
 
 public class WorkoutDefinitionTest {
@@ -29,15 +32,12 @@ public class WorkoutDefinitionTest {
 	    @Test
 	    public void test() throws ParseException {
 	    	WorkoutDefinition wd = em.find(WorkoutDefinition.class, 1);
-	        assertEquals(1, wd.getWorkoutId());
-	        assertEquals(1, wd.getExerciseId());
 	        assertEquals(1, wd.getSet());
 	        
 	        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	        Date expected = formatter.parse("1000-01-01");
 	        assertEquals(expected, wd.getDate());
 	        
-	        assertEquals(1, wd.getUserAssociation());
 	        assertEquals((Integer)1, wd.getExerciseOrdinal());
 	        assertEquals(null, wd.getWeight());
 	        assertEquals(null, wd.getReps());
@@ -47,6 +47,14 @@ public class WorkoutDefinitionTest {
 	        assertEquals(null, wd.getIncline());
 	        assertEquals((Integer)1, wd.getLevel());
 	      
+	        Account account = wd.getAccount();
+	        assertEquals(1, account.getId());
+	        
+	        Workout workout = wd.getWorkout();
+	        assertEquals(1, workout.getId());
+	        
+	        Exercise exercise = wd.getExercise();
+	        assertEquals(1, exercise.getId());
 	    }
 
 	    @After
