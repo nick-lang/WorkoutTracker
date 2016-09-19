@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,15 +20,16 @@ public class WorkoutDaoJPAImpl implements WorkoutDao{
     private EntityManager em;
     
     public Account userHasAccount(String username, String password) {
-    	String queryString = "SELECT a FROM account a JOIN FETCH user u on u.account_id = a.id WHERE a.username = ?1 AND a.password = ?2";
+    	String queryString = "SELECT a FROM Account a WHERE a.username = ?1 AND a.password = ?2";
     	
-    	List<Account> results = em.createQuery(queryString, Account.class)
-    			.setParameter(1, username)
-    			.setParameter(2, password)
-    			.getResultList();
+    	TypedQuery<Account> results = em.createQuery(queryString, Account.class);
+    			results.setParameter(1, username);
+    			results.setParameter(2, password);
+    			return results.getSingleResult();
+    
     	
-    	if ((results.size() > 1) || (results.size() == 0)) return null;
-    	else return results.get(0);
+//    	if ((results.size() > 1) || (results.size() == 0)) return null;
+//    	else return results.get(0);
 	}
     
     public boolean userIsAdmin(String username, String password) {
