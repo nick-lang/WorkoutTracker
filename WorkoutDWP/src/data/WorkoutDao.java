@@ -10,7 +10,7 @@ public interface WorkoutDao {
 
 	public int createUserAccount(Account account, User user, Address address);
 
-	public boolean userHasAccount(String username, String password);
+	public Account userHasAccount(String username, String password);
 
 	public boolean userIsAdmin(String username, String password);
 

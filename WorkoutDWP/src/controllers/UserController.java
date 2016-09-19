@@ -20,10 +20,10 @@ public class UserController {
    
    @RequestMapping(path="GetLogin.do", method=RequestMethod.POST, params = {"username","password"})
    public ModelAndView getLogin(String username, String password) {
-	   Boolean login = workoutDao.userHasAccount(username, password);
+	   Account account = workoutDao.userHasAccount(username, password);
 	   Boolean admin = workoutDao.userIsAdmin(username, password);
-	   if (login) {
-		   System.out.println("Welcome " + workoutDao.getUser(username));
+	   if (account != null) {
+		   System.out.println("Welcome " + account.getUser().getFirstName() + " " + account.getUser().getLastName());
 		   if (admin) System.out.println("You are an Admin");
 	   } else System.out.println("Sorry, you are not authorized to use this system");
 	   return new ModelAndView("user.jsp", "username", username);

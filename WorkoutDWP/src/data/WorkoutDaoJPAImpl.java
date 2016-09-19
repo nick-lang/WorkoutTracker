@@ -18,18 +18,25 @@ public class WorkoutDaoJPAImpl implements WorkoutDao{
     @PersistenceContext
     private EntityManager em;
     
-    public boolean userHasAccount(String username, String password) {
-    	Account account = em.find(Account.class, username);
-    	if (account.getPassword().equals(password)) return true;
-    	else return false;
+    public Account userHasAccount(String username, String password) {
+    	String queryString = "SELECT a FROM account a JOIN FETCH user u on u.account_id = a.id WHERE a.username = ?1 AND a.password = ?2";
+    	
+    	List<Account> results = em.createQuery(queryString, Account.class)
+    			.setParameter(1, username)
+    			.setParameter(2, password)
+    			.getResultList();
+    	
+    	if ((results.size() > 1) || (results.size() == 0)) return null;
+    	else return results.get(0);
 	}
     
     public boolean userIsAdmin(String username, String password) {
     	
-    	Account account = em.getReference(Account.class, username);
-    	if (account.getUsername().equals("admin")) return true;
+    	Account result = userHasAccount(username,password);
+    	if ((result.getUsername().equals("admin") && (result.getPassword().equals("admin")))) return true;
     	else return false;
-    }
+	}
+
 
     public User getUser(int id) {
     	System.out.println("I'm here @ getuser WorkoutDaoJPA");
