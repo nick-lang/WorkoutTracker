@@ -23,13 +23,13 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 
 		String queryString = "SELECT a FROM Account a JOIN FETCH User u on u.accountId = a.id WHERE a.username = ?1 AND a.password = ?2";
 
-		TypedQuery<Account> results = em.createQuery(queryString, Account.class);
-		results.setParameter(1, username);
-		results.setParameter(2, password);
-		return results.getSingleResult();
-
-		// if ((results.size() > 1) || (results.size() == 0)) return null;
-		// else return results.get(0);
+		List <Account> results = em.createQuery(queryString, Account.class)
+				.setParameter(1, username)
+				.setParameter(2, password)
+				.getResultList();
+		
+		 if ((results.size() > 1) || (results.size() == 0)) return null;
+		 else return results.get(0);
 	}
 
 	public boolean userIsAdmin(String username, String password) {
