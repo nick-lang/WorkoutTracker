@@ -33,6 +33,7 @@ public class UserController {
    public ModelAndView getUser(@RequestParam("id") int id) {
 	   System.out.println("I'm here @ GetUser.do");
 	   User user = workoutDao.getUser(id);
+	   System.out.println("user: " + user);
 	   return new ModelAndView("user.jsp", "user", user);
    }
    

@@ -19,7 +19,7 @@ public class WorkoutDaoJPAImpl implements WorkoutDao{
     private EntityManager em;
     
     public boolean userHasAccount(String username, String password) {
-    	Account account = em.getReference(Account.class, username);
+    	Account account = em.find(Account.class, username);
     	if (account.getPassword().equals(password)) return true;
     	else return false;
 	}
