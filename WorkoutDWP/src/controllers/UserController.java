@@ -31,6 +31,7 @@ public class UserController {
    
    @RequestMapping(path="GetUser.do", method=RequestMethod.GET, params = "id")
    public ModelAndView getUser(@RequestParam("id") int id) {
+	   System.out.println("I'm here @ GetUser.do");
 	   User user = workoutDao.getUser(id);
 	   return new ModelAndView("user.jsp", "user", user);
    }

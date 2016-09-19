@@ -18,14 +18,12 @@ public class WorkoutDaoJPAImpl implements WorkoutDao{
     @PersistenceContext
     private EntityManager em;
     
-    @Override
     public boolean userHasAccount(String username, String password) {
     	Account account = em.getReference(Account.class, username);
     	if (account.getPassword().equals(password)) return true;
     	else return false;
 	}
     
-    @Override
     public boolean userIsAdmin(String username, String password) {
     	
     	Account account = em.getReference(Account.class, username);
@@ -33,37 +31,32 @@ public class WorkoutDaoJPAImpl implements WorkoutDao{
     	else return false;
     }
 
-    @Override
     public User getUser(int id) {
+    	System.out.println("I'm here @ getuser WorkoutDaoJPA");
         User user = em.find(User.class, id);
         return user;
     }
     
-    @Override
     public User getUser(String username) {
     	User user = new User();
     	return em.find(User.class, user.getAccount().getPassword().equals(username));
     }
 
-    @Override
     public List<User> getAllUsers() {
     	Query query = em.createQuery("SELECT e FROM user e");
     	return (List<User>) query.getResultList();
     }
     
-    @Override
     public Account getAccount(int id) {
     	Account account = em.find(Account.class, id);
     	return account;
     }
-    
-    @Override
+
     public List<Account> getAllAccounts() {
         Query query = em.createQuery("SELECT e FROM account e");
         return (List<Account>) query.getResultList();
     }
     
-    @Override
     public int createUserAccount(Account account, User user, Address address) {
     	if ((em.find(User.class, user.getFirstName()) != null) &&
     	(em.find(User.class, user.getLastName()) != null)) return -1;
@@ -80,7 +73,6 @@ public class WorkoutDaoJPAImpl implements WorkoutDao{
     	return 1;
     }
     
-    @Override
     public int removeUserAccount(Account account) {
 
     	if ((em.find(Account.class, account.getUser().getFirstName()) == null) &&
