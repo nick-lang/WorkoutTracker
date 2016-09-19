@@ -8,34 +8,18 @@
 <title>Calendar</title>
 </head>
 <body>
-
+<h1>${date.monthName}</h1>
 	<form id="form" action="GetCalendarData.do" method="GET">
-		<input class="button" type="submit" name="back" value="Back" /> 
-		<input class="button" type="submit" name="next" value="Next" />
+		<input type="hidden" name="year" value="${date.year}" />
+		<input type="hidden" name="month" value="${date.monthInt}" />
+		<input type="hidden" name="day" value="${date.dayInt}"/>
+		<input type="hidden" name="accountId" value="${account.id}" />
+		<input type="submit" name="back" value="Back" />
+		<input type="submit" name="next" value="Next" />
 	</form>
 	
-	<table border="1" cellspacing="0" cellpadding="4">
-		<tr>
-			<td width="100%" colspan="7">Jan 2016</td>
-		</tr>
-		<tr>
-			<th width="15%">Sun</th>
-			<th width="14%">Mon</th>
-			<th width="14%">Tue</th>
-			<th width="14%">Wed</th>
-			<th width="14%">Thu</th>
-			<th width="14%">Fri</th>
-			<th width="15%">Sat</th>
-		</tr>
-		<tr>
-			<td>day</td>
-			<td>day</td>
-			<td>day</td>
-			<td>day</td>
-			<td>day</td>
-			<td>day</td>
-			<td>day</td>
-		</tr>
-	</table>
+<c:forEach var="i" begin="1" end="${date.days}">
+   Day: <c:out value="${i}"/><p>
+</c:forEach>
 </body>
 </html>
