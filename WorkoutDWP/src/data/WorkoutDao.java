@@ -1,18 +1,36 @@
 package data;
 
+import java.util.List;
+
 import entities.Account;
 import entities.Address;
 import entities.User;
 
 public interface WorkoutDao {
+
+	public int createUserAccount(Account account, User user, Address address);
+
+	public boolean userHasAccount(String username, String password);
+
+	public boolean userIsAdmin(String username, String password);
+
+	public Account getAccount(int id);
+
+	public List<Account> getAllAccounts();
+
+	public User getUser(int id);
+
+	public User getUser(String username);
 	
+	public List<User> getAllUsers();
+
+	public int removeUserAccount(Account account);
+
 //	Rod
-//	1. Create User Accounts
-	public void createUserAccount(Account account, User user, Address address) {
-	}
-//	2. User Login
-	public void userAccountAuthinacation(int user_id) {
-	}
+//	1. Verify Login: a. User is Authorized, b. User is an Admin
+//	2. Create/Remove/Update Account: a. User b. Account
+//  ?. Get list of accounts: a. User, b. Account
+
 	
 //	Nick
 //	3. Pick a preDefined Workout

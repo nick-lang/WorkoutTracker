@@ -36,6 +36,18 @@ public class User {
 	@JoinColumn(name="address_id")
 	private Address address;
 	
+	public int getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(int accountId) {
+		this.accountId = accountId;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
 	public Account getAccount() {
 		return account;
 	}
