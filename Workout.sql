@@ -77,7 +77,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `account` ;
 
 CREATE TABLE IF NOT EXISTS `account` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NULL,
   `password` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
