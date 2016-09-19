@@ -19,7 +19,7 @@ public class WorkoutDaoJPAImpl implements WorkoutDao{
     private EntityManager em;
     
     public Account userHasAccount(String username, String password) {
-    	String queryString = "SELECT a FROM account a JOIN FETCH user u on u.account_id = a.id WHERE a.username = ?1 AND a.password = ?2";
+    	String queryString = "SELECT a FROM Account a JOIN FETCH User u on u.accountId = a.id WHERE a.username = ?1 AND a.password = ?2";
     	
     	List<Account> results = em.createQuery(queryString, Account.class)
     			.setParameter(1, username)
@@ -37,7 +37,6 @@ public class WorkoutDaoJPAImpl implements WorkoutDao{
     	else return false;
 	}
 
-
     public User getUser(int id) {
     	System.out.println("I'm here @ getuser WorkoutDaoJPA");
         User user = em.find(User.class, id);
@@ -45,12 +44,18 @@ public class WorkoutDaoJPAImpl implements WorkoutDao{
     }
     
     public User getUser(String username) {
-    	User user = new User();
-    	return em.find(User.class, user.getAccount().getPassword().equals(username));
+    	String queryString = "SELECT u FROM User u JOIN FETCH Account a on u.accountId = a.id WHERE a.username = ?1";
+    	
+    	List<User> results = em.createQuery(queryString, User.class)
+    			.setParameter(1, username)
+    			.getResultList();
+    	
+    	if ((results.size() > 1) || (results.size() == 0)) return null;
+    	else return results.get(0);
     }
 
     public List<User> getAllUsers() {
-    	Query query = em.createQuery("SELECT e FROM user e");
+    	Query query = em.createQuery("SELECT u FROM User u");
     	return (List<User>) query.getResultList();
     }
     
@@ -60,7 +65,7 @@ public class WorkoutDaoJPAImpl implements WorkoutDao{
     }
 
     public List<Account> getAllAccounts() {
-        Query query = em.createQuery("SELECT e FROM account e");
+        Query query = em.createQuery("SELECT a FROM Account a");
         return (List<Account>) query.getResultList();
     }
     

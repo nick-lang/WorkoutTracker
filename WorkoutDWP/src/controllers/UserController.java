@@ -22,9 +22,16 @@ public class UserController {
    public ModelAndView getLogin(String username, String password) {
 	   Account account = workoutDao.userHasAccount(username, password);
 	   Boolean admin = workoutDao.userIsAdmin(username, password);
+	   System.out.println("Test #1");
 	   if (account != null) {
 		   System.out.println("Welcome " + account.getUser().getFirstName() + " " + account.getUser().getLastName());
 		   if (admin) System.out.println("You are an Admin");
+	   } else System.out.println("Sorry, you are not authorized to use this system");
+	   
+	   User user = workoutDao.getUser(username);
+	   System.out.println("Test #2");
+	   if (user != null) {
+		   System.out.println("Welcome " + user.getFirstName() + " " + user.getLastName());
 	   } else System.out.println("Sorry, you are not authorized to use this system");
 	   return new ModelAndView("user.jsp", "username", username);
    }
