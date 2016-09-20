@@ -2,6 +2,7 @@ package entities;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +20,17 @@ public class Workout {
 
 	private String description;
 	
+	@Column(name = "account_association")
+	private Integer accountAssociation;
+	
+	public Integer getAccountAssociation() {
+		return accountAssociation;
+	}
+
+	public void setAccountAssociation(Integer accountAssociation) {
+		this.accountAssociation = accountAssociation;
+	}
+
 	@OneToMany(mappedBy="workout")
 	private List<WorkoutDefinition> workoutDefinitions;
 

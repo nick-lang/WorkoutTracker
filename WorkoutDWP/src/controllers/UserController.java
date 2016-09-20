@@ -12,7 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import data.WorkoutDao;
 import entities.Account;
+import entities.Address;
 import entities.User;
+import entities.Workout;
 import entities.WorkoutDefinition;
 import helpers.MyDate;
 
@@ -28,8 +30,8 @@ public class UserController {
 
 		List<WorkoutDefinition> wds = new ArrayList<>();
 		for (int i = 1; i <= date.getDays(); i++) {
-			if (workoutDao.getUserWorkouts(date.getYear(), date.getMonthInt(), i, account.getId()) != null) {
-				wds.add(workoutDao.getUserWorkouts(date.getYear(), date.getMonthInt(), i, account.getId()));
+			if (workoutDao.getUserWorkout(date.getYear(), date.getMonthInt(), i, account.getId()) != null) {
+				wds.add(workoutDao.getUserWorkout(date.getYear(), date.getMonthInt(), i, account.getId()));
 			}
 		}
 
@@ -139,8 +141,8 @@ public class UserController {
 
 		List<WorkoutDefinition> wds = new ArrayList<>();
 		for (int i = 1; i <= date.getDays(); i++) {
-			if (workoutDao.getUserWorkouts(date.getYear(), date.getMonthInt(), i, account.getId()) != null) {
-				wds.add(workoutDao.getUserWorkouts(date.getYear(), date.getMonthInt(), i, account.getId()));
+			if (workoutDao.getUserWorkout(date.getYear(), date.getMonthInt(), i, account.getId()) != null) {
+				wds.add(workoutDao.getUserWorkout(date.getYear(), date.getMonthInt(), i, account.getId()));
 			}
 		}
 
@@ -161,8 +163,8 @@ public class UserController {
 
 		List<WorkoutDefinition> wds = new ArrayList<>();
 		for (int i = 1; i <= date.getDays(); i++) {
-			if (workoutDao.getUserWorkouts(date.getYear(), date.getMonthInt(), i, account.getId()) != null) {
-				wds.add(workoutDao.getUserWorkouts(date.getYear(), date.getMonthInt(), i, account.getId()));
+			if (workoutDao.getUserWorkout(date.getYear(), date.getMonthInt(), i, account.getId()) != null) {
+				wds.add(workoutDao.getUserWorkout(date.getYear(), date.getMonthInt(), i, account.getId()));
 			}
 		}
 
@@ -170,6 +172,43 @@ public class UserController {
 		mv.addObject("account", account);
 		mv.addObject("date", date);
 		mv.addObject("workouts", wds);
+		return mv;
+	}
+
+	@RequestMapping(path = "GetAddWorkout.do", method = RequestMethod.GET)
+	public ModelAndView getAddForm(@RequestParam("year") String year, @RequestParam("month") String month,
+			@RequestParam("day") String day, @RequestParam("accountId") String accountId) {
+		System.out.println(year + month + day + accountId);
+		MyDate date = new MyDate();
+		date.setDate(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
+		Account account = workoutDao.getAccount(Integer.parseInt(accountId));
+
+		List<Workout> ws = new ArrayList<>();
+		ws = workoutDao.getAdminWorkouts();
+
+		ModelAndView mv = new ModelAndView("addWorkout.jsp");
+		mv.addObject("account", account);
+		mv.addObject("date", date);
+		mv.addObject("workouts", ws);
+		return mv;
+	}
+
+	@RequestMapping(path = "AddWorkout.do", method = RequestMethod.POST)
+	public ModelAndView setWorkout(@RequestParam("year") String year, @RequestParam("month") String month,
+			@RequestParam("day") String day, @RequestParam("accountId") String accountId,
+			@RequestParam("workoutId") String workoutId) {
+		System.out.println(year + month + day + accountId);
+		MyDate date = new MyDate();
+		date.setDate(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
+		Account account = workoutDao.getAccount(Integer.parseInt(accountId));
+
+		List<Workout> ws = new ArrayList<>();
+		ws = workoutDao.getAdminWorkouts();
+
+		ModelAndView mv = new ModelAndView("addWorkout.jsp");
+		mv.addObject("account", account);
+		mv.addObject("date", date);
+		mv.addObject("workouts", ws);
 		return mv;
 	}
 }

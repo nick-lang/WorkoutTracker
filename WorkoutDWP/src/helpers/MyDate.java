@@ -44,6 +44,10 @@ public class MyDate {
 		date = date.minusMonths(1);
 		setValues();
 	}
+	public void setDate(int y, int m, int d) {
+		date = LocalDate.of(y, m, d);
+		setValues();
+	}
 	
 	public int getDayInt() {
 		return dayInt;

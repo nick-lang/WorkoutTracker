@@ -40,7 +40,7 @@
 				</c:if>
 			</c:forEach>
 			<c:if test="${hasEdit eq 'false'}">
-				<form id="form" action="AddWorkout.do" method="GET">
+				<form id="form" action="GetAddWorkout.do" method="GET">
 					<input type="hidden" name="year" value="${date.year}" /> <input
 						type="hidden" name="month" value="${date.monthInt}" /> <input
 						type="hidden" name="day" value="${i}" /> <input type="hidden"
