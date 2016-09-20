@@ -1,10 +1,10 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -12,22 +12,21 @@ import javax.persistence.OneToMany;
 public class Workout {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	private String name;
 
 	private String description;
 	
-	@OneToMany(mappedBy="workout")
+	@OneToMany(mappedBy="workout", cascade=CascadeType.PERSIST)
 	private List<WorkoutDefinition> workoutDefinitions;
 
-	public List<WorkoutDefinition> getWorkoutDefinitions() {
-		return workoutDefinitions;
+	public int getId() {
+		return id;
 	}
 
-	public void setWorkoutDefinitions(List<WorkoutDefinition> workoutDefinitions) {
-		this.workoutDefinitions = workoutDefinitions;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -46,13 +45,32 @@ public class Workout {
 		this.description = description;
 	}
 
-	public int getId() {
-		return id;
+	public List<WorkoutDefinition> getWorkoutDefinitions() {
+		return workoutDefinitions;
 	}
 
-	@Override
-	public String toString() {
-		return "Workout [id=" + id + ", name=" + name + ", description=" + description + "]";
+	public void setWorkoutDefinitions(List<WorkoutDefinition> workoutDefinitions) {
+		this.workoutDefinitions = workoutDefinitions;
+	}
+
+	public void addWorkoutDefinition(WorkoutDefinition workoutDefinition) {
+		if (workoutDefinitions == null) {
+			workoutDefinitions = new ArrayList<>();
+		}
+		if (!workoutDefinitions.contains(workoutDefinition)) {
+			workoutDefinitions.add(workoutDefinition);
+			if (workoutDefinition.getWorkout() != null){
+				workoutDefinition.getWorkout().getWorkoutDefinitions().remove(workoutDefinition);
+			}
+			workoutDefinition.setWorkout(this);
+		}
+	}
+
+	public void removeUser(WorkoutDefinition workoutDefinition) {
+		workoutDefinition.setWorkout(null);
+		if (workoutDefinitions != null) {
+			workoutDefinitions.remove(workoutDefinition);
+		}
 	}
 
 }

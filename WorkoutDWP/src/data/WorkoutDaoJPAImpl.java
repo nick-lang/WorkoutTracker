@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -112,23 +111,26 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 			return 0;
 		}
 		System.out.println("Here #2 in createUserAccount");
-		System.out.println("account object: " + account);
 		em.persist(account);
+		System.out.println("accountID: " + account.getId());
+		System.out.println("account object: " + account);
 
 		System.out.println("Here #3 in createUserAccount");
 		user.setAccountId(account.getId());
-		account.setUser(user);
 		user.setAccount(account);
+		System.out.println("user object: " + user);
+		System.out.println("userID: " + user.getAccountId());
 		address.setId(account.getId());
-		account.getUser().setAddress(address);
-
+		account.setUser(user);
+		address.addUser(user);
+//		account.getUser().setAddress(address);
+//		user.setAddress(address);
 		System.out.println("Here #4 in createUserAccount");
+		System.out.println("address.getUsers().size(): " + address.getUsers().size());
+		System.out.println("user.getAddress(): " + user.getAddress());
 		em.persist(address);
 		System.out.println("Here #5 in createUserAccount");
-		// em.persist(address);
-		// user.setAddress(address);
 		em.persist(user);
-
 		return 1;
 	}
 

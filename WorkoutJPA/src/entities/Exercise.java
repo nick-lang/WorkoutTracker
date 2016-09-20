@@ -1,11 +1,10 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -15,14 +14,13 @@ import javax.persistence.OneToMany;
 public class Exercise {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
 
-	@OneToMany(mappedBy="exercise")
+	@OneToMany(mappedBy = "exercise")
 	private List<WorkoutDefinition> workoutDefinitions;
 
 	@Column(name = "exercise_name")
@@ -35,6 +33,14 @@ public class Exercise {
 
 	@Column(name = "image_url")
 	private String imageURL;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public Category getCategory() {
 		return category;
@@ -84,15 +90,24 @@ public class Exercise {
 		this.imageURL = imageURL;
 	}
 
-	public int getId() {
-		return id;
+	public void addWorkoutDefinition(WorkoutDefinition workoutDefinition) {
+		if (workoutDefinitions == null) {
+			workoutDefinitions = new ArrayList<>();
+		}
+		if (!workoutDefinitions.contains(workoutDefinition))
+			if (workoutDefinition.getExercise() != null) {
+				workoutDefinition.getExercise().getWorkoutDefinitions().remove(workoutDefinition);
+			}
+		workoutDefinition.setExercise(this);
 	}
 
-//	@Override
-//	public String toString() {
-//		return "Exercise [id=" + id + ", categoryId=" + categoryId + ", account=" + account + ", exerciseName="
-//				+ exerciseName + ", description=" + description + ", videoURL=" + videoURL + ", imageURL=" + imageURL
-//				+ "]";
-//	}
+	public void removeUser(WorkoutDefinition workoutDefinition) {
+		workoutDefinition.setExercise(null);
+		if (workoutDefinitions != null) {
+			workoutDefinitions.remove(workoutDefinition);
+		}
+	}
 
+
+	
 }

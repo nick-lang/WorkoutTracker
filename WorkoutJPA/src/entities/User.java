@@ -1,11 +1,8 @@
 package entities;
 
-import java.util.ArrayList;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -15,14 +12,13 @@ import javax.persistence.OneToOne;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="account_id")
+	@Column(name = "account_id")
 	private int accountId;
-	
-	@OneToOne
+
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "account_id")
 	private Account account;
-	
+
 	private String gender;
 	private Double height;
 	private Double weight;
@@ -33,11 +29,20 @@ public class User {
 	private String lastName;
 	private int age;
 	private String email;
-	
+
 	@ManyToOne
-	@JoinColumn(name="address_id")
+	@JoinColumn(name = "address_id")
 	private Address address;
-	
+
+	public Double getBmi() {
+		setBmi();
+		return bmi;
+	}
+
+	public void setBmi() {
+		this.bmi = ((int) (((weight * 703) / (height * height)) * 100)) / 100.0;
+	}
+
 	public int getAccountId() {
 		return accountId;
 	}
@@ -46,20 +51,12 @@ public class User {
 		this.accountId = accountId;
 	}
 
-	public void setAccount(Account account) {
-		this.account = account;
-	}
-
 	public Account getAccount() {
 		return account;
 	}
 
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
 	public String getGender() {
@@ -84,15 +81,6 @@ public class User {
 
 	public void setWeight(Double weight) {
 		this.weight = weight;
-	}
-
-	public Double getBmi() {
-		setBmi();
-		return bmi;
-	}
-
-	public void setBmi() {
-		this.bmi = ((int) (((weight * 703) / (height * height)) * 100)) / 100.0;
 	}
 
 	public String getFirstName() {
@@ -127,12 +115,12 @@ public class User {
 		this.email = email;
 	}
 
-	@Override
-	public String toString() {
-		return "User [account=" + account + ", gender=" + gender + ", height=" + height + ", weight=" + weight
-				+ ", bmi=" + bmi + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + ", email="
-				+ email + ", address=" + address + "]";
+	public Address getAddress() {
+		return address;
 	}
 
-	
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
 }

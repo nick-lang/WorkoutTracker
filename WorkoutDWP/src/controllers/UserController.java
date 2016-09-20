@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import data.WorkoutDao;
 import entities.Account;
+import entities.Address;
 import entities.User;
 import entities.WorkoutDefinition;
 import helpers.MyDate;

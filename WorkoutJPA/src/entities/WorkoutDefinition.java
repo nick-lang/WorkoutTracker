@@ -2,6 +2,7 @@ package entities;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,17 +14,17 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "workout_definition")
-public class WorkoutDefinition{
+public class WorkoutDefinition {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@ManyToOne
+
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "workout_id")
 	private Workout workout;
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "exercise_id")
 	private Exercise exercise;
 
@@ -39,7 +40,7 @@ public class WorkoutDefinition{
 
 	private Date date;
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "account_association")
 	private Account account;
 
@@ -68,14 +69,6 @@ public class WorkoutDefinition{
 		this.workout = workout;
 	}
 
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
-	}
-
 	public int getSet() {
 		return set;
 	}
@@ -90,6 +83,14 @@ public class WorkoutDefinition{
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
 	public Integer getExerciseOrdinal() {
@@ -156,14 +157,17 @@ public class WorkoutDefinition{
 		this.incline = incline;
 	}
 
-	// @Override
-	// public String toString() {
-	// return "WorkoutDefinition [workoutId=" + workoutId + ", exerciseId=" +
-	// exerciseId + ", set=" + set + ", date="
-	// + date + ", exerciseOrdinal=" + exerciseOrdinal + ", weight="
-	// + weight + ", reps=" + reps + ", level=" + level + ", time=" + time + ",
-	// pace=" + pace + ", distance="
-	// + distance + ", incline=" + incline + "]";
-	// }
+	public int getId() {
+		return id;
+	}
 
+	@Override
+	public String toString() {
+		return "WorkoutDefinition [id=" + id + ", workout=" + workout + ", exercise=" + exercise + ", set=" + set
+				+ ", date=" + date + ", account=" + account + ", exerciseOrdinal=" + exerciseOrdinal + ", weight="
+				+ weight + ", reps=" + reps + ", level=" + level + ", time=" + time + ", pace=" + pace + ", distance="
+				+ distance + ", incline=" + incline + "]";
+	}
+
+	
 }

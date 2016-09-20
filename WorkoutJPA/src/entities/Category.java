@@ -1,55 +1,45 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Category {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="category_name")
+
+	@Column(name = "category_name")
 	private String categoryName;
-	
-	@OneToMany(mappedBy="category")
+
+	@OneToMany(mappedBy = "category")
 	private List<Exercise> exercises;
-	
+
 	private Boolean reps;
 
 	private Boolean time;
-	
+
 	private Boolean pace;
-	
+
 	private Boolean distance;
-	
+
 	private Boolean weight;
-	
+
 	private Boolean incline;
-	
+
 	private Boolean level;
 
-	public List<Exercise> getExercises() {
-		return exercises;
+	public int getId() {
+		return id;
 	}
 
-	public void setExercises(List<Exercise> exercises) {
-		this.exercises = exercises;
-	}
-
-	public Boolean getWeight() {
-		return weight;
-	}
-
-	public void setWeight(Boolean weight) {
-		this.weight = weight;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getCategoryName() {
@@ -58,6 +48,14 @@ public class Category {
 
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+
+	public List<Exercise> getExercises() {
+		return exercises;
+	}
+
+	public void setExercises(List<Exercise> exercises) {
+		this.exercises = exercises;
 	}
 
 	public Boolean getReps() {
@@ -92,6 +90,14 @@ public class Category {
 		this.distance = distance;
 	}
 
+	public Boolean getWeight() {
+		return weight;
+	}
+
+	public void setWeight(Boolean weight) {
+		this.weight = weight;
+	}
+
 	public Boolean getIncline() {
 		return incline;
 	}
@@ -108,15 +114,26 @@ public class Category {
 		this.level = level;
 	}
 
-	public int getId() {
-		return id;
+	public void addExercise(Exercise exercise) {
+		if (exercises == null) {
+			exercises = new ArrayList<>();
+		}
+		if (!exercises.contains(exercise)) {
+			exercises.add(exercise);
+			if (exercise.getCategory() != null){
+				exercise.getCategory().getExercises().remove(exercise);
+			}
+			exercise.setCategory(this);
+		}
 	}
 
-	@Override
-	public String toString() {
-		return "Category [id=" + id + ", categoryName=" + categoryName + ", reps=" + reps + ", time=" + time + ", pace="
-				+ pace + ", distance=" + distance + ", weight=" + weight + ", incline=" + incline + ", level=" + level
-				+ "]";
+	public void removeExercise(Exercise exercise) {
+		exercise.setCategory(null);
+		if (exercises != null) {
+			exercises.remove(exercise);
+		}
 	}
 
+
+	
 }
