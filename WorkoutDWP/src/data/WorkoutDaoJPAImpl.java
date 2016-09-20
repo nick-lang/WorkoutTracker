@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import entities.Account;
 import entities.Address;
 import entities.User;
+import entities.Workout;
 import entities.WorkoutDefinition;
 
 @Transactional
@@ -156,7 +157,7 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 	}
 
 	@Override
-	public WorkoutDefinition getUserWorkouts(int y, int m, int d, int accountId) {
+	public WorkoutDefinition getUserWorkout(int y, int m, int d, int accountId) {
 		String queryString = "SELECT DISTINCT wd FROM WorkoutDefinition wd WHERE wd.account.id = ?1 AND wd.date = ?2";
 		Date date = new Date(y - 1900, m - 1, d);
 		// System.out.println("" + date);
@@ -170,6 +171,20 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 			return null;
 		}
 
+	}
+	
+	@Override
+	public List<Workout> getAdminWorkouts(){
+		String queryString = "SELECT DISTINCT w FROM Workout w WHERE accountAssociation = 1";
+
+		try {
+			List<Workout> results = em.createQuery(queryString, Workout.class).getResultList();
+			// System.out.println("Found!");
+			 System.out.println(results.size());
+			return results;
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }

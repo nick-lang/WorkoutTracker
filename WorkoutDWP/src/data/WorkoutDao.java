@@ -5,6 +5,7 @@ import java.util.List;
 import entities.Account;
 import entities.Address;
 import entities.User;
+import entities.Workout;
 import entities.WorkoutDefinition;
 
 public interface WorkoutDao {
@@ -29,7 +30,6 @@ public interface WorkoutDao {
 
 	public Account getAccount(String username);
 
-	public WorkoutDefinition getUserWorkouts(int year, int monthInt, int i, int id);
 
 //	Rod
 //	1. Verify Login: a. User is Authorized, b. User is an Admin
@@ -40,6 +40,9 @@ public interface WorkoutDao {
 //	Nick
 //	3. Pick a preDefined Workout
 //	4. Build a new User Designed Workout
+	public WorkoutDefinition getUserWorkout(int year, int monthInt, int i, int id);
+	
+	List<Workout> getAdminWorkouts();
 	
 //	Backlog
 //	5. Add/Remove Exercises from Predefined or User Designed Workout
