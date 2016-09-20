@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -22,8 +23,8 @@ public class Address {
 	private String address2;
 	private String city;
 	private String state;
-	private int zip;
-	private int phone;
+	private String zip;
+	private String phone;
 	
 	public List<User> getUsers() {
 		return users;
@@ -31,9 +32,28 @@ public class Address {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
+	
+	public void addUser(User user) {
+        if (users == null) {
+             users = new ArrayList<>();
+        }
+        if (! users.contains(user)) {
+             users.add(user);
+             user.addAddress(this);
+        }
+	}
+	
+	 public void removeUser(User user) {
+	     if (users != null && users.contains(user)) {
+	         users.remove(user);
+	         user.removeAddress(this);
+	     }
+	 }
+	
 	public String getAddress() {
 		return address;
 	}
+	
 	public void setAddress(String address) {
 		this.address = address;
 	}
@@ -55,20 +75,24 @@ public class Address {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public int getZip() {
+	public String getZip() {
 		return zip;
 	}
-	public void setZip(int zip) {
+	public void setZip(String zip) {
 		this.zip = zip;
 	}
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public int getId() {
 		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 	@Override
 	public String toString() {

@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.ArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +23,7 @@ public class User {
 	@JoinColumn(name = "account_id")
 	private Account account;
 	
-	private char gender;
+	private String gender;
 	private Double height;
 	private Double weight;
 	private Double bmi = 0.0;
@@ -60,11 +62,11 @@ public class User {
 		this.address = address;
 	}
 
-	public char getGender() {
+	public String getGender() {
 		return gender;
 	}
 
-	public void setGender(char gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 

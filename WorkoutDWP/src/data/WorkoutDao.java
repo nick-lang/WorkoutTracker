@@ -26,6 +26,8 @@ public interface WorkoutDao {
 
 	public int removeUserAccount(Account account);
 
+	public Account getAccount(String username);
+
 //	Rod
 //	1. Verify Login: a. User is Authorized, b. User is an Admin
 //	2. Create/Remove/Update Account: a. User b. Account

@@ -59,47 +59,79 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 	}
 
 	public List<User> getAllUsers() {
-		Query query = em.createQuery("SELECT u FROM User u");
-		return (List<User>) query.getResultList();
+		List<User> results = em.createQuery("SELECT u FROM User u",User.class).getResultList();
+		return results;
 	}
 
 	public Account getAccount(int id) {
 		Account account = em.find(Account.class, id);
 		return account;
 	}
+	
+	public Account getAccount(String username) {
+		String queryString = "SELECT a FROM Account a JOIN FETCH User u on u.accountId = a.id WHERE a.username = ?1";
+
+		List<Account> results = em.createQuery(queryString, Account.class).setParameter(1, username).getResultList();
+
+		if ((results.size() > 1) || (results.size() == 0))
+			return null;
+		else
+			return results.get(0);
+	}
 
 	public List<Account> getAllAccounts() {
-		Query query = em.createQuery("SELECT a FROM Account a");
-		return (List<Account>) query.getResultList();
+		List<Account> results = em.createQuery("SELECT a FROM Account a",Account.class).getResultList();
+		return results;
 	}
 
 	public int createUserAccount(Account account, User user, Address address) {
-		if ((em.find(User.class, user.getFirstName()) != null) && (em.find(User.class, user.getLastName()) != null))
+		System.out.println("Here #1 in createUserAccount");
+		List<User> currentUsers = getAllUsers();
+		System.out.println("All Current Users: " + currentUsers);
+		List<Account> currentAccounts = getAllAccounts();
+		System.out.println("All Current Accounts: " + currentAccounts);
+		
+		if ((currentUsers.contains(user.getFirstName())) && (currentUsers.contains(user.getLastName())))
+			{
+			System.out.println("Account not created: User name already exists");
 			return -1;
+			}
 
-		if ((em.find(Account.class, account.getUsername()) != null)
-				&& (em.find(Account.class, account.getPassword()) != null))
+		if ((currentAccounts.contains(account.getUsername())) && (currentAccounts.contains(account.getPassword())))
+			{
+			System.out.println("Account not created: Account username and password already exists");
 			return 0;
+			}
 
+		System.out.println("Here #2 in createUserAccount");
+		System.out.println("account object: " + account);
 		em.persist(account);
+		
+		System.out.println("Here #3 in createUserAccount");
+		user.setAccountId(account.getId());
+		account.setUser(user);
 		user.setAccount(account);
-		em.persist(address);
-		user.setAddress(address);
+		address.setId(account.getId());
+		account.getUser().setAddress(address);
+		
+		System.out.println("Here #4 in createUserAccount");
+	    em.persist(address);
+	    System.out.println("Here #5 in createUserAccount");
 		em.persist(user);
-
 		return 1;
 	}
 
 	public int removeUserAccount(Account account) {
 
-		if ((em.find(Account.class, account.getUser().getFirstName()) == null)
-				&& (em.find(Account.class, account.getUser().getLastName()) == null))
-			return -1;
-
-		em.remove(account.getUser());
-		em.remove(account);
-
-		return 1;
+		if (userHasAccount(account.getUsername(), account.getPassword()) != null)
+		{
+			em.remove(account.getUser().getAddress());
+			em.remove(account.getUser().getAccount());
+			em.remove(account.getUser());
+			System.out.println("Account removed!");
+			return 1;
+		} else return -1;
+		
 	}
 
 }
