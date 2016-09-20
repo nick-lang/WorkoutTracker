@@ -3,7 +3,7 @@ package helpers;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 
-public class Date {
+public class MyDate {
 	LocalDate date;
 	private int year;
 	private String monthName;
@@ -17,7 +17,7 @@ public class Date {
 	private int firstDayOfMonth;
 
 	
-	public Date() {
+	public MyDate() {
 		date = LocalDate.now();
 		setValues();
 	}
