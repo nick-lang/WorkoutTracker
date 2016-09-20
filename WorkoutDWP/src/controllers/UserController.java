@@ -197,18 +197,25 @@ public class UserController {
 	public ModelAndView setWorkout(@RequestParam("year") String year, @RequestParam("month") String month,
 			@RequestParam("day") String day, @RequestParam("accountId") String accountId,
 			@RequestParam("workoutId") String workoutId) {
-		System.out.println(year + month + day + accountId);
+		// System.out.println(year + month + day + accountId);
 		MyDate date = new MyDate();
 		date.setDate(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
 		Account account = workoutDao.getAccount(Integer.parseInt(accountId));
 
-		List<Workout> ws = new ArrayList<>();
-		ws = workoutDao.getAdminWorkouts();
+		workoutDao.makeUserWorkoutDef(date.getYear(), date.getMonthInt(), date.getDayInt(), account.getId(),
+				Integer.parseInt(workoutId));
 
-		ModelAndView mv = new ModelAndView("addWorkout.jsp");
+		List<WorkoutDefinition> wds = new ArrayList<>();
+		for (int i = 1; i <= date.getDays(); i++) {
+			if (workoutDao.getUserWorkout(date.getYear(), date.getMonthInt(), i, account.getId()) != null) {
+				wds.add(workoutDao.getUserWorkout(date.getYear(), date.getMonthInt(), i, account.getId()));
+			}
+		}
+
+		ModelAndView mv = new ModelAndView("calendar.jsp");
 		mv.addObject("account", account);
 		mv.addObject("date", date);
-		mv.addObject("workouts", ws);
+		mv.addObject("workouts", wds);
 		return mv;
 	}
 }

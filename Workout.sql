@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `address` (
   `address2` VARCHAR(45) NULL,
   `city` VARCHAR(45) NULL,
   `state` VARCHAR(45) NULL,
-  `zip` INT NULL,
+  `zip` VARCHAR(15) NULL,
   `phone` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -141,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `workout_definition` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `workout_id` INT NOT NULL,
   `exercise_id` INT NOT NULL,
-  `set` INT NOT NULL,
+  `exercise_set` INT NOT NULL,
   `date` DATE NOT NULL,
   `account_association` INT NOT NULL,
   `exercise_ordinal` INT NOT NULL,
@@ -243,7 +243,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `workoutdb`;
-INSERT INTO `address` (`id`, `address`, `address2`, `city`, `state`, `zip`, `phone`) VALUES (1, 'place street', 'other place', 'denver', 'CO', 12345, '1234567');
+INSERT INTO `address` (`id`, `address`, `address2`, `city`, `state`, `zip`, `phone`) VALUES (1, 'place street', 'other place', 'denver', 'CO', '12345', '1234567');
 
 COMMIT;
 
@@ -263,29 +263,29 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `workoutdb`;
-INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (DEFAULT, 1, 1, 1, '1000-01-01', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (DEFAULT, 1, 2, 1, '1000-01-01', 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (DEFAULT, 1, 3, 1, '1000-01-01', 1, 5, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (DEFAULT, 1, 4, 1, '1000-01-01', 1, 7, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (DEFAULT, 1, 1, 2, '1000-01-01', 1, 9, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (DEFAULT, 1, 2, 2, '1000-01-01', 1, 11, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (DEFAULT, 1, 3, 2, '1000-01-01', 1, 13, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (DEFAULT, 1, 4, 2, '1000-01-01', 1, 15, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (DEFAULT, 1, 1, 3, '1000-01-01', 1, 17, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (DEFAULT, 1, 2, 3, '1000-01-01', 1, 19, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (DEFAULT, 1, 3, 3, '1000-01-01', 1, 21, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (DEFAULT, 1, 4, 3, '1000-01-01', 1, 23, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (DEFAULT, 1, 8, 1, '1000-01-01', 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (DEFAULT, 1, 8, 2, '1000-01-01', 1, 4, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (DEFAULT, 1, 8, 3, '1000-01-01', 1, 6, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (DEFAULT, 1, 8, 4, '1000-01-01', 1, 8, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (DEFAULT, 1, 8, 5, '1000-01-01', 1, 10, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (DEFAULT, 1, 8, 6, '1000-01-01', 1, 12, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (DEFAULT, 1, 8, 7, '1000-01-01', 1, 14, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (DEFAULT, 1, 8, 8, '1000-01-01', 1, 16, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (DEFAULT, 1, 8, 9, '1000-01-01', 1, 18, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (DEFAULT, 1, 8, 10, '1000-01-01', 1, 20, NULL, NULL, NULL, NULL, NULL, NULL, '1');
-INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (DEFAULT, 1, 8, 11, '1000-01-01', 1, 22, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `exercise_set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (1, 1, 1, 1, '1000-01-01', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `exercise_set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (2, 1, 2, 1, '1000-01-01', 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `exercise_set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (3, 1, 3, 1, '1000-01-01', 1, 5, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `exercise_set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (4, 1, 4, 1, '1000-01-01', 1, 7, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `exercise_set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (5, 1, 1, 2, '1000-01-01', 1, 9, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `exercise_set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (6, 1, 2, 2, '1000-01-01', 1, 11, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `exercise_set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (7, 1, 3, 2, '1000-01-01', 1, 13, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `exercise_set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (8, 1, 4, 2, '1000-01-01', 1, 15, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `exercise_set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (9, 1, 1, 3, '1000-01-01', 1, 17, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `exercise_set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (10, 1, 2, 3, '1000-01-01', 1, 19, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `exercise_set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (11, 1, 3, 3, '1000-01-01', 1, 21, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `exercise_set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (12, 1, 4, 3, '1000-01-01', 1, 23, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `exercise_set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (13, 1, 8, 1, '1000-01-01', 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `exercise_set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (14, 1, 8, 2, '1000-01-01', 1, 4, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `exercise_set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (15, 1, 8, 3, '1000-01-01', 1, 6, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `exercise_set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (16, 1, 8, 4, '1000-01-01', 1, 8, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `exercise_set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (17, 1, 8, 5, '1000-01-01', 1, 10, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `exercise_set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (18, 1, 8, 6, '1000-01-01', 1, 12, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `exercise_set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (19, 1, 8, 7, '1000-01-01', 1, 14, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `exercise_set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (20, 1, 8, 8, '1000-01-01', 1, 16, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `exercise_set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (21, 1, 8, 9, '1000-01-01', 1, 18, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `exercise_set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (22, 1, 8, 10, '1000-01-01', 1, 20, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `workout_definition` (`id`, `workout_id`, `exercise_id`, `exercise_set`, `date`, `account_association`, `exercise_ordinal`, `weight`, `reps`, `time`, `pace`, `distance`, `incline`, `level`) VALUES (23, 1, 8, 11, '1000-01-01', 1, 22, NULL, NULL, NULL, NULL, NULL, NULL, '1');
 
 COMMIT;
 
