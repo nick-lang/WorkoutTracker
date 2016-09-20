@@ -5,6 +5,7 @@ import java.util.List;
 import entities.Account;
 import entities.Address;
 import entities.User;
+import entities.WorkoutDefinition;
 
 public interface WorkoutDao {
 
@@ -27,6 +28,8 @@ public interface WorkoutDao {
 	public int removeUserAccount(Account account);
 
 	public Account getAccount(String username);
+
+	public WorkoutDefinition getUserWorkouts(int year, int monthInt, int i, int id);
 
 //	Rod
 //	1. Verify Login: a. User is Authorized, b. User is an Admin

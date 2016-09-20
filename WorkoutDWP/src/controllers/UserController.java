@@ -32,7 +32,7 @@ public class UserController {
 				wds.add(workoutDao.getUserWorkouts(date.getYear(), date.getMonthInt(), i, account.getId()));
 			}
 		}
-		
+
 		// if (wds.size() != 0) {
 		// System.out.println(wds.get(0).getSet());
 		// }
@@ -53,12 +53,20 @@ public class UserController {
 		// user.getLastName());
 		// } else System.out.println("Sorry, you are not authorized to use this
 		// system");
+		//
+		// account = workoutDao.getAccount(username);
+		// System.out.println("Test #3");
+		// if (user != null) {
+		// System.out.println("Welcome " + account.getUser().getFirstName() + "
+		// " + account.getUser().getLastName());
+		// } else System.out.println("Sorry, you are not authorized to use this
+		// system");
 
 		ModelAndView mv = new ModelAndView("calendar.jsp");
 		mv.addObject("account", account);
 		mv.addObject("date", date);
 		mv.addObject("workouts", wds);
-		
+
 		return mv;
 	}
 
@@ -88,6 +96,40 @@ public class UserController {
 		return new ModelAndView("user.jsp", "accounts", accounts);
 	}
 
+	@RequestMapping(path = "CreateNewUser.do", method = RequestMethod.GET)
+	public ModelAndView createNewUser(String firstName, String lastName, int age, String gender, Double height,
+			Double weight, String email, String address, String address2, String city, String state, String zip,
+			String phone, String username, String password) {
+
+		User userNew = new User();
+		userNew.setFirstName(firstName);
+		userNew.setLastName(lastName);
+		userNew.setAge(age);
+		userNew.setGender(gender);
+		userNew.setHeight(height);
+		userNew.setWeight(weight);
+		userNew.setEmail(email);
+
+		Address addressNew = new Address();
+		addressNew.setAddress(address);
+		addressNew.setAddress2(address2);
+		addressNew.setCity(city);
+		addressNew.setState(state);
+		addressNew.setZip(zip);
+		addressNew.setPhone(phone);
+
+		Account accountNew = new Account();
+		accountNew.setUsername(username);
+		accountNew.setPassword(password);
+
+		System.out.println("New User: " + userNew);
+		System.out.println("New Address: " + addressNew);
+		System.out.println("New Account username: " + accountNew.getUsername());
+		System.out.println("New Account password: " + accountNew.getPassword());
+		workoutDao.createUserAccount(accountNew, userNew, addressNew);
+		return new ModelAndView("user.jsp", "address", addressNew);
+	}
+
 	@RequestMapping(path = "GetCalendarData.do", params = "next", method = RequestMethod.GET)
 	public ModelAndView getNextByMonth(@RequestParam("year") String year, @RequestParam("month") String month,
 			@RequestParam("day") String day, @RequestParam("accountId") String accountId) {
@@ -101,7 +143,7 @@ public class UserController {
 				wds.add(workoutDao.getUserWorkouts(date.getYear(), date.getMonthInt(), i, account.getId()));
 			}
 		}
-		
+
 		ModelAndView mv = new ModelAndView("calendar.jsp");
 		mv.addObject("account", account);
 		mv.addObject("date", date);
@@ -123,7 +165,7 @@ public class UserController {
 				wds.add(workoutDao.getUserWorkouts(date.getYear(), date.getMonthInt(), i, account.getId()));
 			}
 		}
-		
+
 		ModelAndView mv = new ModelAndView("calendar.jsp");
 		mv.addObject("account", account);
 		mv.addObject("date", date);
