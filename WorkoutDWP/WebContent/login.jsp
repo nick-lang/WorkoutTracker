@@ -15,14 +15,6 @@
 
 <title>Workout Tracker</title>
 
-<!-- Acknowledgements:
-   ==================================================
-   1. Template: Designed by Tooplate (Pure Mix 6 pages)
-   2. Bootstrap Navbar on Mobile:
-   		a. Ref #1: http://stackoverflow.com/questions/20863288/bootstrap-3-slide-in-menu-navbar-on-mobile
-   		b. Ref #2: https://github.com/iamphill/Bootstrap-Offcanvas
--->
-
 <!-- Bootstrap CSS
    ================================================== -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -87,223 +79,23 @@ Adding OSX wget function:
      </a>
     <h1><a class="navbar-brand wow lightSpeedIn" data-wow-delay="4.5s" href="index.html">Workout Tracker</a></h1>
    </div>
-   <div id="slidemenu">
+<div id="fullscreen_bg" class="fullscreen_bg"/>
 
-    <ul class="nav navbar-nav">
-     <li class="active"><a href="http://www.safercar.gov/CheckForRecalls" target="_blank">Recalls</a></li>
-                        <li><a href="https://tiresize.com/how-to-read-tire-size/">How to Read Tire Size</a></li>
-                        <li><a href="https://tiresize.com/calculator/">Tire Calculator</a></li>
-                        <li><a href="https://tiresize.com/comparison/">Tire Size Comparison</a></li>
-     <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tire Performance Categories <b class="caret"></b></a>
-      <ul class="dropdown-menu">
-       <li class="dropdown-header">Summer Passenger</li>
-       <li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=EP" >Extreme Performance Summer</a></li>
-											<li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=MP" >Max Performance Summer</a></li>
-											<li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=UHP" >Ultra High Performance Summer</a></li>
-											<li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=HP" >High Performance Summer</a></li>
-											<li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=GT" >Grand Touring Summer</a></li>
-       <li class="divider"></li>
-       <li class="dropdown-header">All-Season Passenger Tires</li>
-       <li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=UHPAS" >Ultra High Performance All-Season</a></li>
-											<li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=HPAS" >High Performance All-Season</a></li>
-											<li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=PAS" >Performance All-Season</a></li>
-											<li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=GTAS" >Grand Touring All-Season</a></li>
-											<li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=ST" >Standard Touring All-Season</a></li>
-											<li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=AS" >Passenger All-Season</a></li>
-       <li class="divider"></li>
-       <li class="dropdown-header">Winter / Snow Passenger Tires</li>
-       <li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=PSIS" >Studless Ice & Snow</a></li>
-											<li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=PSW" >Studdable Winter / Snow</a></li>
-											<li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=PPW" >Performance Winter / Snow</a></li>
-       <li class="divider"></li>
-       <li class="dropdown-header">Track & Competition DOT Tires</li>
-       <li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=UHPAS" >Ultra High Performance All-Season</a></li>
-											<li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=DRY" >Racetrack & Autocross Only</a></li>
-											<li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=WET" >Wet Racetrack & Autocross Only</a></li>
-											<li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=STRT" >Streetable Track & Competition</a></li>
-											<li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=DRAG" >Drag Racing Radials</a></li>
-       <li class="divider"></li>
-       <li class="dropdown-header">Summer Light Truck/SUV Tires</li>
-       <li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=PSIS" >Studless Ice & Snow</a></li>
-											<li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=SST" >Street/Sport Truck Summer</a></li>
-											<li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=HR" >Highway Rib Summer</a></li>
-       <li class="divider"></li>
-       <li class="dropdown-header">All-Season Light Truck/SUV Tires</li>
-       <li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=SSTAS" >Street/Sport Truck All-Season</a></li>
-											<li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=CSTAS" >Crossover/SUV Touring All-Season</a></li>
-											<li><a href="http://www.tirerack.com/tires/types/perfCat.jsp?perf=HAS" >Highway All-Season</a></li>
-      </ul>
-     </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-          <li><a href="https://www.google.com/maps/" target="_blank">Google Maps</a></li>
-          <li><a href="https://vpic.nhtsa.dot.gov/" target="_blank">NHTSA</a></li>
-          <li><a href="https://www.weather.com/maps/" target="_blank">TWC</a></li>
-    </ul>
+<div class="container">
 
-   </div>
-  </div>
- </div>
-	</header>
+	<form class="form-signin">
+		<h1 class="form-signin-heading text-muted">Sign In</h1>
+		<input type="text" class="form-control" placeholder="Email address" required="" autofocus="">
+		<input type="password" class="form-control" placeholder="Password" required="">
+		<button class="btn btn-lg btn-primary btn-block" type="submit">
+			Sign In
+		</button>
+	</form>
 
-	<!-- Header section
-================================================== -->
-	<section id="header" class="header-one">
-	<div class="container">
-		<div class="row">
-
-			<div class="col-md-offset-0 col-sm-6 col-sm-offset-0 col-sm-6">
-				<div class="header-thumb wow lightSpeedIn lightSpeedOut"
-					data-wow-delay="1.6s">
-					<h1 class="wow lightSpeedIn lightSpeedOut" data-wow-delay="0.6s">There's
-						a tire for every occasion</h1>
-				</div>
-				</br>
-				<div class="header-thumb wow lightSpeedIn lightSpeedOut"
-					data-wow-delay="3.0s">
-					<h1 class="wow lightSpeedIn lightSpeedOut" data-wow-delay="2.0s">Let's
-						ride</h1>
-				</div>
-			</div>
-
-		</div>
-	</div>
-	</section>
-
-
-	<!-- Portfolio section
-================================================== -->
-
-	<section id="portfolio">
-	<div class="container">
-		<div class="row">
-
-			<div class="col-md-12 col-sm-12">
-
-				<!-- iso section -->
-               <div class="iso-section wow fadeInUp" data-wow-delay="2.6s">
-			<div class="table-responsive">
-			<table class="table table-striped table-hover">
-               <tr>
-                           <td><a ><form action="GetDealerList.do" method="GET">
-           				   <a><input class="btn btn-primary" type="submit" value="View Dealer List" /></a>
-                           </form></a></td>
-                           <td><a ><form action="GetDealerInfo.do" method="GET">
-           				   <a><input class="btn btn-primary" type="submit" value="Get Dealer Info" /></a>
-                           </form></a></td>
-                           <td><a ><form action="AddDealer.do" method="GET">
-           				   <a><input class="btn btn-primary" type="submit" value="Add New Dealer" /></a>
-                           </form></a></td>
-               </tr>
-               </table>
-
-                        <!-- iso box section -->
-					<div class="iso-box-section wow fadeInUp" data-wow-delay="1s">
-						<div class="iso-box-wrapper col4-iso-box">
-
-							<div class="iso-box photoshop branding col-md-4 col-sm-6">
-								<div class="portfolio-thumb">
-									<img src="images/portfolio-img1.jpg" class="img-responsive"
-										alt="Portfolio">
-									<div class="portfolio-overlay">
-										<div class="portfolio-item">
-											<a href="getAllSeason.do"><i class="fa fa-link"></i></a>
-											<h2>All Season</h2>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="iso-box graphic template col-md-4 col-sm-6">
-								<div class="portfolio-thumb">
-									<img src="images/portfolio-img2.jpg" class="img-responsive"
-										alt="Portfolio">
-									<div class="portfolio-overlay">
-										<div class="portfolio-item">
-											<a href="getWinter.do"><i class="fa fa-link"></i></a>
-											<h2>Winter</h2>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="iso-box template graphic col-md-4 col-sm-6">
-								<div class="portfolio-thumb">
-									<img src="images/portfolio-img3.jpg" class="img-responsive"
-										alt="Portfolio">
-									<div class="portfolio-overlay">
-										<div class="portfolio-item">
-											<a href="getPerformance.do"><i class="fa fa-link"></i></a>
-											<h2>Performance</h2>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="iso-box graphic template col-md-4 col-sm-6">
-								<div class="portfolio-thumb">
-									<img src="images/portfolio-img4.jpg" class="img-responsive"
-										alt="Portfolio">
-									<div class="portfolio-overlay">
-										<div class="portfolio-item">
-											<a href="getHighPerformance.do"><i class="fa fa-link"></i></a>
-											<h2>High Performance</h2>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="iso-box photoshop branding col-md-4 col-sm-6">
-								<div class="portfolio-thumb">
-									<img src="images/portfolio-img5.jpg" class="img-responsive"
-										alt="Portfolio">
-									<div class="portfolio-overlay">
-										<div class="portfolio-item">
-											<a href="getLightTruck.do"><i class="fa fa-link"></i></a>
-											<h2>Light Truck</h2>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="iso-box graphic branding col-md-4 col-sm-6">
-								<div class="portfolio-thumb">
-									<img src="images/portfolio-img6.jpg" class="img-responsive"
-										alt="Portfolio">
-									<div class="portfolio-overlay">
-										<div class="portfolio-item">
-											<a href="getTouring.do"><i class="fa fa-link"></i></a>
-											<h2>Touring</h2>
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
-	</div>
-	</section>
-
+</div>
 	<!-- Footer section
 ================================================== -->
-	<footer>
-	<div class="container">
-		<div class="row">
 
-			<div class="col-md-12 col-sm-12">
-				<p class="wow fadeInUp" data-wow-delay="0.3s">Copyright © 2016
-					rodhammond.info - Designed by Tooplate</p>
-			</div>
-
-		</div>
-	</div>
-	</footer>
 
 
 	<!-- Javascript 
