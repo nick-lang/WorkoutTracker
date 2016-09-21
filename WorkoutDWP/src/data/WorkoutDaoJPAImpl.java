@@ -27,6 +27,8 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 
 		List<Account> results = em.createQuery(queryString, Account.class).setParameter(1, username)
 				.setParameter(2, password).getResultList();
+		
+		System.out.println("Accounts List: " + results);
 
 		if ((results.size() > 1) || (results.size() == 0))
 			return null;
@@ -63,8 +65,6 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 	public List<User> getAllUsers() {
 		List<User> results = em.createQuery("SELECT u FROM User u", User.class).getResultList();
 		return results;
-		// Query query = em.createQuery("SELECT u FROM User u");
-		// return (List<User>) query.getResultList();
 	}
 
 	public Account getAccount(int id) {
@@ -86,74 +86,56 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 	public List<Account> getAllAccounts() {
 		List<Account> results = em.createQuery("SELECT a FROM Account a", Account.class).getResultList();
 		return results;
-		// Query query = em.createQuery("SELECT a FROM Account a");
-		// return (List<Account>) query.getResultList();
 	}
 
 	public int createUserAccount(Account account, User user, Address address) {
-		//
-		System.out.println("Here #1 in createUserAccount");
-		List<User> currentUsers = getAllUsers();
-		System.out.println("All Current Users: " + currentUsers);
-		List<Account> currentAccounts = getAllAccounts();
-		System.out.println("All Current Accounts: " + currentAccounts);
 
+		List<User> currentUsers = getAllUsers();
 		if ((currentUsers.contains(user.getFirstName())) && (currentUsers.contains(user.getLastName()))) {
 			System.out.println("Account not created: User name already exists");
-			//
-			// if ((em.find(User.class, user.getFirstName()) != null) &&
-			// (em.find(User.class, user.getLastName()) != null))
 			return -1;
 		}
-		if ((currentAccounts.contains(account.getUsername())) && (currentAccounts.contains(account.getPassword()))) {
-			System.out.println("Account not created: Account username and password already exists");
-			// if ((em.find(Account.class, account.getUsername()) != null)
-			// && (em.find(Account.class, account.getPassword()) != null))
+
+		List<Account> currentAccounts = getAllAccounts();
+		if (currentAccounts.contains(account.getUsername())) {
+			System.out.println("Account not created: username already exists");
 			return 0;
 		}
-		System.out.println("Here #2 in createUserAccount");
+		
 		em.persist(account);
-		System.out.println("accountID: " + account.getId());
-		System.out.println("account object: " + account);
-
-		System.out.println("Here #3 in createUserAccount");
 		user.setAccountId(account.getId());
 		user.setAccount(account);
-		System.out.println("user object: " + user);
-		System.out.println("userID: " + user.getAccountId());
-		address.setId(account.getId());
 		account.setUser(user);
+		address.setId(account.getId());
 		address.addUser(user);
-//		account.getUser().setAddress(address);
-//		user.setAddress(address);
-		System.out.println("Here #4 in createUserAccount");
-		System.out.println("address.getUsers().size(): " + address.getUsers().size());
-		System.out.println("user.getAddress(): " + user.getAddress());
 		em.persist(address);
-		System.out.println("Here #5 in createUserAccount");
 		em.persist(user);
+		System.out.println("Account Record Created");
 		return 1;
 	}
 
-	public int removeUserAccount(Account account) {
+	public void  updateUserAccount(Account account, User user, Address address) {
+		
+		if (account != null) em.persist(account);
+		if (address != null) em.persist(address);
+		if (user != null) em.persist(user);
+		System.out.println("Account Record Updated");
+	}
+	
+	public int removeUserAccount(int id) {
+		Account account = em.find(Account.class, id);
+		User user = em.find(User.class, id);
+		Address address = em.find(Address.class, id);
+		
 		if (userHasAccount(account.getUsername(), account.getPassword()) != null) {
-			em.remove(account.getUser().getAddress());
-			em.remove(account.getUser().getAccount());
-			em.remove(account.getUser());
-			System.out.println("Account removed!");
+			em.remove(address);
+			em.remove(user);
+			em.remove(account);
+			System.out.println("Account Record Removed");
 			return 1;
 		} else
+			System.out.println("No Record Found");
 			return -1;
-
-		// if ((em.find(Account.class, account.getUser().getFirstName()) ==
-		// null)
-		// && (em.find(Account.class, account.getUser().getLastName()) == null))
-		// return -1;
-		//
-		// em.remove(account.getUser());
-		// em.remove(account);
-		//
-		// return 1;
 	}
 
 	@Override

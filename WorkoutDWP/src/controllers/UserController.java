@@ -75,9 +75,9 @@ public class UserController {
 	@RequestMapping(path = "GetUser.do", method = RequestMethod.GET, params = "id")
 	public ModelAndView getUser(@RequestParam("id") int id) {
 		System.out.println("I'm here @ GetUser.do");
-		User user = workoutDao.getUser(id);
-		System.out.println("user: " + user);
-		return new ModelAndView("user.jsp", "user", user);
+		System.out.println("remove user Step #1: " + workoutDao.getUser(id).getFirstName() + " " + workoutDao.getUser(id).getLastName());
+		int status = workoutDao.removeUserAccount(id);
+		return new ModelAndView("user.jsp", "status", status);
 	}
 
 	@RequestMapping(path = "GetUsers.do", method = RequestMethod.GET)
