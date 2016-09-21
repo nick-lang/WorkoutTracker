@@ -116,7 +116,7 @@ public class UserController {
 		return new ModelAndView("user.jsp", "accounts", accounts);
 	}
 
-	@RequestMapping(path = "CreateNewUser.do", method = RequestMethod.GET)
+	@RequestMapping(path = "CreateNewUser.do", method = RequestMethod.POST, params = "submit")
 	public ModelAndView createNewUser(String firstName, String lastName, int age, String gender, Double height,
 			Double weight, String email, String address, String address2, String city, String state, String zip,
 			String phone, String username, String password) {
@@ -148,6 +148,11 @@ public class UserController {
 		System.out.println("New Account password: " + accountNew.getPassword());
 		workoutDao.createUserAccount(accountNew, userNew, addressNew);
 		return new ModelAndView("user.jsp", "address", addressNew);
+	}
+	
+	@RequestMapping(path = "CreateNewUser.do", method = RequestMethod.GET, params = "close")
+	public ModelAndView createNewUser() {
+		return new ModelAndView("index.html");
 	}
 
 	@RequestMapping(path = "GetCalendarData.do", params = "next", method = RequestMethod.GET)
