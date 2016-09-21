@@ -36,7 +36,8 @@ public class WorkoutDefinition {
 		this.exercise = exercise;
 	}
 
-	private int set;
+	@Column(name = "exercise_set")
+	private int exerciseSet;
 
 	private Date date;
 
@@ -69,12 +70,12 @@ public class WorkoutDefinition {
 		this.workout = workout;
 	}
 
-	public int getSet() {
-		return set;
+	public int getExerciseSet() {
+		return exerciseSet;
 	}
 
-	public void setSet(int set) {
-		this.set = set;
+	public void setExerciseSet(int exerciseSet) {
+		this.exerciseSet = exerciseSet;
 	}
 
 	public Date getDate() {
@@ -161,13 +162,13 @@ public class WorkoutDefinition {
 		return id;
 	}
 
-	@Override
-	public String toString() {
-		return "WorkoutDefinition [id=" + id + ", workout=" + workout + ", exercise=" + exercise + ", set=" + set
-				+ ", date=" + date + ", account=" + account + ", exerciseOrdinal=" + exerciseOrdinal + ", weight="
-				+ weight + ", reps=" + reps + ", level=" + level + ", time=" + time + ", pace=" + pace + ", distance="
-				+ distance + ", incline=" + incline + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "WorkoutDefinition [id=" + id + ", workout=" + workout + ", exercise=" + exercise + ", set=" + set
+//				+ ", date=" + date + ", account=" + account + ", exerciseOrdinal=" + exerciseOrdinal + ", weight="
+//				+ weight + ", reps=" + reps + ", level=" + level + ", time=" + time + ", pace=" + pace + ", distance="
+//				+ distance + ", incline=" + incline + "]";
+//	}
 
 	
 }

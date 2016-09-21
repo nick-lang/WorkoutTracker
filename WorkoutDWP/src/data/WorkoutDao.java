@@ -37,7 +37,11 @@ public interface WorkoutDao {
 //	4. Build a new User Designed Workout
 	public WorkoutDefinition getUserWorkout(int year, int monthInt, int i, int id);
 	
-	List<Workout> getAdminWorkouts();
+	public List<Workout> getAdminWorkouts();
+
+	public void makeUserWorkoutDef(int year, int month, int day, int accountID, int workoutId);
+
+	public List<WorkoutDefinition> getWorkoutForEdit(int year, int monthInt, int dayInt, int accountId, int workoutId);
 	
 //	Backlog
 //	5. Add/Remove Exercises from Predefined or User Designed Workout

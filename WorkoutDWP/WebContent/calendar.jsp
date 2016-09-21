@@ -29,11 +29,12 @@
 
 				<c:if test="${i == fDate}">
 					${w.workout.name}
-					<form id="form" action="EditWorkout.do" method="GET">
+					<form id="form" action="GetEditWorkout.do" method="GET">
 						<input type="hidden" name="year" value="${date.year}" /> <input
 							type="hidden" name="month" value="${date.monthInt}" /> <input
 							type="hidden" name="day" value="${i}" /> <input type="hidden"
-							name="accountId" value="${account.id}" /> <input type="submit"
+							name="accountId" value="${account.id}" /> <input type="hidden"
+							name="workoutId" value="${w.id}" /> <input type="submit"
 							name="edit" value="View/Edit" />
 					</form>
 					<c:set var="hasEdit" value="true" />
