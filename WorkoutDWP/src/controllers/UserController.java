@@ -5,9 +5,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import data.WorkoutDao;
@@ -17,9 +20,12 @@ import entities.User;
 import entities.Workout;
 import entities.WorkoutDefinition;
 import helpers.MyDate;
+import helpers.WorkoutEditor;
 
 @Controller
+@SessionAttributes("catVars")
 public class UserController {
+	
 	@Autowired
 	private WorkoutDao workoutDao;
 
@@ -217,5 +223,64 @@ public class UserController {
 		mv.addObject("date", date);
 		mv.addObject("workouts", wds);
 		return mv;
+	}
+
+	@RequestMapping(path = "GetEditWorkout.do", method = RequestMethod.GET)
+//	public ModelAndView getEditWorkout(@RequestParam("year") String year, @RequestParam("month") String month,
+//			@RequestParam("day") String day, @RequestParam("accountId") String accountId,
+//			@RequestParam("workoutId") String workoutId) {
+	public String getEditWorkout(@RequestParam("year") String year, @RequestParam("month") String month,
+			@RequestParam("day") String day, @RequestParam("accountId") String accountId,
+			@RequestParam("workoutId") String workoutId, Model model) {
+
+		
+		// System.out.println(year + month + day + accountId);
+		MyDate date = new MyDate();
+		date.setDate(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
+		Account account = workoutDao.getAccount(Integer.parseInt(accountId));
+
+		List<WorkoutDefinition> wd = new ArrayList<>();
+
+		wd = workoutDao.getWorkoutForEdit(date.getYear(), date.getMonthInt(), date.getDayInt(), account.getId(),
+				Integer.parseInt(workoutId));
+
+//		ModelAndView mv = new ModelAndView("editWorkout.jsp");
+
+		model.addAttribute("catVars", new WorkoutEditor());
+		model.addAttribute("account", account);
+		model.addAttribute("date", date);
+		model.addAttribute("workout", wd);
+		
+		return "editWorkout.jsp";
+	}
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping(path = "EditWorkout.do", method = RequestMethod.POST)
+	public String EditWorkout(@RequestParam("year") String year, @RequestParam("month") String month,
+			@RequestParam("day") String day, @RequestParam("accountId") String accountId,
+			@RequestParam("workoutId") String workoutId, @ModelAttribute WorkoutEditor catVars, Model model) {
+
+		System.out.println(catVars);
+//
+//		MyDate date = new MyDate();
+//		date.setDate(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
+//		Account account = workoutDao.getAccount(Integer.parseInt(accountId));
+//
+//		List<WorkoutDefinition> wd = new ArrayList<>();
+//
+//		wd = workoutDao.getWorkoutForEdit(date.getYear(), date.getMonthInt(), date.getDayInt(), account.getId(),
+//				Integer.parseInt(workoutId));
+//		
+//		model.addAttribute("catVars", new WorkoutEditor());
+//		model.addAttribute("account", account);
+//		model.addAttribute("date", date);
+//		model.addAttribute("workout", wd);
+//		
+		return "editWorkout.jsp";
 	}
 }

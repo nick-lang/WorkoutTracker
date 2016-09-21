@@ -193,20 +193,19 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 		String queryString = "SELECT wd FROM WorkoutDefinition wd WHERE date = ?1 AND wd.account.id = 1 AND wd.workout.id = ?2";
 		Date date = new Date(1000 - 1900, 1 - 1, 1);
 		System.out.println("in makeUserWorkoutDef");
-		
+
 		List<WorkoutDefinition> results = new ArrayList<>();
 		try {
 			results = em.createQuery(queryString, WorkoutDefinition.class).setParameter(1, date)
 					.setParameter(2, workoutId).getResultList();
-//			 System.out.println(results);
-//			System.out.println(results.size());
+			// System.out.println(results);
+			// System.out.println(results.size());
 		} catch (NoResultException e) {
 		}
-		
-		
+
 		date = new Date(year - 1900, month - 1, day);
 		for (WorkoutDefinition wd : results) {
-			
+
 			WorkoutDefinition newWd = new WorkoutDefinition();
 			newWd.setWorkout(wd.getWorkout());
 			newWd.setExercise(wd.getExercise());
@@ -217,6 +216,21 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 			System.out.println("Account set" + newWd);
 			em.persist(newWd);
 		}
+	}
+
+	@Override
+	public List<WorkoutDefinition> getWorkoutForEdit(int year, int monthInt, int dayInt, int accountId, int workoutId) {
+		String queryString = "SELECT wd FROM WorkoutDefinition wd WHERE wd.account.id = ?1 AND wd.date = ?2 ORDER BY exerciseOrdinal ASC";
+		Date date = new Date(1000 - 1900, 1 - 1, 1);
+		
+		System.out.println("in getWorkoutForEdit");
+		
+		List<WorkoutDefinition> results = new ArrayList<>();
+
+		results = em.createQuery(queryString, WorkoutDefinition.class).setParameter(1, accountId).setParameter(2, date)
+				.getResultList();
+		System.out.println(results);
+		return results;
 	}
 
 }
