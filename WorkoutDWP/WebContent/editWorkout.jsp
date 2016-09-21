@@ -9,7 +9,7 @@
 <title>Edit Workout</title>
 </head>
 <body>
-	<c:set var="counter" value="${0}" scope="page" />
+	<c:set var="counter" value="${counter = 0}" scope="page" />
 	<form:form modelAttribute="catVars" method="post"
 		action="EditWorkout.do">
 		<c:forEach var="w" items="${workout}">
