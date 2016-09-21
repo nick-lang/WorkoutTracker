@@ -3,6 +3,7 @@ package data;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Stack;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -29,7 +30,7 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 
 		List<Account> results = em.createQuery(queryString, Account.class).setParameter(1, username)
 				.setParameter(2, password).getResultList();
-		
+
 		System.out.println("Accounts List: " + results);
 
 		if ((results.size() > 1) || (results.size() == 0))
@@ -103,7 +104,7 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 			System.out.println("Account not created: username already exists");
 			return 0;
 		}
-		
+
 		em.persist(account);
 		user.setAccountId(account.getId());
 		user.setAccount(account);
@@ -116,19 +117,22 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 		return 1;
 	}
 
-	public void  updateUserAccount(Account account, User user, Address address) {
-		
-		if (account != null) em.persist(account);
-		if (address != null) em.persist(address);
-		if (user != null) em.persist(user);
+	public void updateUserAccount(Account account, User user, Address address) {
+
+		if (account != null)
+			em.merge(account);
+		if (address != null)
+			em.merge(address);
+		if (user != null)
+			em.merge(user);
 		System.out.println("Account Record Updated");
 	}
-	
+
 	public int removeUserAccount(int id) {
 		Account account = em.find(Account.class, id);
 		User user = em.find(User.class, id);
 		Address address = em.find(Address.class, id);
-		
+
 		if (userHasAccount(account.getUsername(), account.getPassword()) != null) {
 			em.remove(address);
 			em.remove(user);
@@ -137,7 +141,7 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 			return 1;
 		} else
 			System.out.println("No Record Found");
-			return -1;
+		return -1;
 	}
 
 	@Override
@@ -204,10 +208,10 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 	@Override
 	public List<WorkoutDefinition> getWorkoutForEdit(int year, int monthInt, int dayInt, int accountId, int workoutId) {
 		String queryString = "SELECT wd FROM WorkoutDefinition wd WHERE wd.account.id = ?1 AND wd.date = ?2 ORDER BY exerciseOrdinal ASC";
-		Date date = new Date(1000 - 1900, 1 - 1, 1);
-		
+		Date date = new Date(year - 1900, monthInt - 1, dayInt);
+
 		System.out.println("in getWorkoutForEdit");
-		
+
 		List<WorkoutDefinition> results = new ArrayList<>();
 
 		results = em.createQuery(queryString, WorkoutDefinition.class).setParameter(1, accountId).setParameter(2, date)
@@ -217,20 +221,56 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 	}
 
 	@Override
-	public void editWorkout(int year, int month, int day, int accountId,
-			int workoutId, WorkoutEditor catVars){
-		
+	public void editWorkout(int year, int month, int day, int accountId, int workoutId, WorkoutEditor catVars) {
+
 		String queryString = "SELECT wd FROM WorkoutDefinition wd WHERE wd.account.id = ?1 AND wd.date = ?2 ORDER BY exerciseOrdinal ASC";
 		Date date = new Date(year - 1900, month - 1, day);
-		
-		
+
 		List<WorkoutDefinition> results = new ArrayList<>();
 		results = em.createQuery(queryString, WorkoutDefinition.class).setParameter(1, accountId).setParameter(2, date)
 				.getResultList();
 
-		System.out.println(results);
-		
+		int listCounter = 0;
+		for (WorkoutDefinition exercise : results) {
+			if (exercise.getExercise().getCategory().getWeight()) {
+				exercise.setWeight(Integer.parseInt(catVars.getWorkoutList().get(listCounter)));
+				listCounter++;
+				em.merge(exercise);
+			}
+			if (exercise.getExercise().getCategory().getReps()) {
+				exercise.setReps(Integer.parseInt(catVars.getWorkoutList().get(listCounter)));
+				listCounter++;
+				em.merge(exercise);
+			}
+			if (exercise.getExercise().getCategory().getTime()) {
+				exercise.setTime(Double.parseDouble(catVars.getWorkoutList().get(listCounter)));
+				listCounter++;
+				em.merge(exercise);
+			}
+			if (exercise.getExercise().getCategory().getPace()) {
+				exercise.setPace(Double.parseDouble(catVars.getWorkoutList().get(listCounter)));
+				listCounter++;
+				em.merge(exercise);
+			}
+			if (exercise.getExercise().getCategory().getDistance()) {
+				exercise.setDistance(Double.parseDouble(catVars.getWorkoutList().get(listCounter)));
+				listCounter++;
+				em.merge(exercise);
+			}
+			if (exercise.getExercise().getCategory().getIncline()) {
+				exercise.setIncline(Double.parseDouble(catVars.getWorkoutList().get(listCounter)));
+				listCounter++;
+				em.merge(exercise);
+			}
+			if (exercise.getExercise().getCategory().getLevel()) {
+				exercise.setLevel(Integer.parseInt(catVars.getWorkoutList().get(listCounter)));
+				listCounter++;
+				em.merge(exercise);
+			}
+
+		}
+		// System.out.println(results);
+
 	}
-	
-	
+
 }
