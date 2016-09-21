@@ -7,6 +7,7 @@ import entities.Address;
 import entities.User;
 import entities.Workout;
 import entities.WorkoutDefinition;
+import helpers.WorkoutEditor;
 
 public interface WorkoutDao {
 
@@ -47,6 +48,8 @@ public interface WorkoutDao {
 	public void makeUserWorkoutDef(int year, int month, int day, int accountID, int workoutId);
 
 	public List<WorkoutDefinition> getWorkoutForEdit(int year, int monthInt, int dayInt, int accountId, int workoutId);
+
+	void editWorkout(int year, int month, int day, int accountId, int workoutId, WorkoutEditor catVars);
 	
 //	Backlog
 //	5. Add/Remove Exercises from Predefined or User Designed Workout

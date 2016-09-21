@@ -51,12 +51,13 @@
 					<c:set var="counter" value="${counter + 1}" scope="page" />
 				</c:if>
 			</p>
+			<c:set var="workoutId" value="${w.workout.id}" scope="page" />
 		</c:forEach>
 		<input type="hidden" name="year" value="${date.year}" />
 		<input type="hidden" name="month" value="${date.monthInt}" />
 		<input type="hidden" name="day" value="${date.dayInt}" />
 		<input type="hidden" name="accountId" value="${account.id}" />
-		<input type="hidden" name="workoutId" value="${w.id}" />
+		<input type="hidden" name="workoutId" value="${workoutId}" />
 		<button type="submit">Submit</button>
 	</form:form>
 </body>

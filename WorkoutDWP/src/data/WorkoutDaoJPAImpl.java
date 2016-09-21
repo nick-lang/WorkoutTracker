@@ -15,6 +15,7 @@ import entities.Address;
 import entities.User;
 import entities.Workout;
 import entities.WorkoutDefinition;
+import helpers.WorkoutEditor;
 
 @Transactional
 public class WorkoutDaoJPAImpl implements WorkoutDao {
@@ -233,4 +234,21 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 		return results;
 	}
 
+	@Override
+	public void editWorkout(int year, int month, int day, int accountId,
+			int workoutId, WorkoutEditor catVars){
+		
+		String queryString = "SELECT wd FROM WorkoutDefinition wd WHERE wd.account.id = ?1 AND wd.date = ?2 ORDER BY exerciseOrdinal ASC";
+		Date date = new Date(year - 1900, month - 1, day);
+		
+		
+		List<WorkoutDefinition> results = new ArrayList<>();
+		results = em.createQuery(queryString, WorkoutDefinition.class).setParameter(1, accountId).setParameter(2, date)
+				.getResultList();
+
+		System.out.println(results);
+		
+	}
+	
+	
 }

@@ -265,11 +265,18 @@ public class UserController {
 			@RequestParam("day") String day, @RequestParam("accountId") String accountId,
 			@RequestParam("workoutId") String workoutId, @ModelAttribute WorkoutEditor catVars, Model model) {
 
-		System.out.println(catVars);
-//
-//		MyDate date = new MyDate();
-//		date.setDate(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
-//		Account account = workoutDao.getAccount(Integer.parseInt(accountId));
+		System.out.println(catVars.getWorkoutList());
+		
+		System.out.println(year + " " + month + " " + day + " " + accountId + " " + workoutId);
+		MyDate date = new MyDate();
+		date.setDate(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
+		Account account = workoutDao.getAccount(Integer.parseInt(accountId));
+		
+		System.out.println(date.getYear() + " " + date.getMonthInt() + " " + date.getDayInt() + " " + account.getId() + " " +
+				Integer.parseInt(workoutId));
+		workoutDao.editWorkout(date.getYear(), date.getMonthInt(), date.getDayInt(), account.getId(),
+				Integer.parseInt(workoutId), catVars);
+
 //
 //		List<WorkoutDefinition> wd = new ArrayList<>();
 //
