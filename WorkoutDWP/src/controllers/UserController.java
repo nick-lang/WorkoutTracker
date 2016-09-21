@@ -226,15 +226,10 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "GetEditWorkout.do", method = RequestMethod.GET)
-//	public ModelAndView getEditWorkout(@RequestParam("year") String year, @RequestParam("month") String month,
-//			@RequestParam("day") String day, @RequestParam("accountId") String accountId,
-//			@RequestParam("workoutId") String workoutId) {
 	public String getEditWorkout(@RequestParam("year") String year, @RequestParam("month") String month,
 			@RequestParam("day") String day, @RequestParam("accountId") String accountId,
 			@RequestParam("workoutId") String workoutId, Model model) {
 
-		
-		// System.out.println(year + month + day + accountId);
 		MyDate date = new MyDate();
 		date.setDate(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
 		Account account = workoutDao.getAccount(Integer.parseInt(accountId));
@@ -242,8 +237,6 @@ public class UserController {
 
 		wd = workoutDao.getWorkoutForEdit(date.getYear(), date.getMonthInt(), date.getDayInt(), account.getId(),
 				Integer.parseInt(workoutId));
-
-//		ModelAndView mv = new ModelAndView("editWorkout.jsp");
 
 		model.addAttribute("catVars", new WorkoutEditor());
 		model.addAttribute("account", account);
