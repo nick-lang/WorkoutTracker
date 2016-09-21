@@ -269,8 +269,21 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 			}
 
 		}
-		// System.out.println(results);
 
+	}
+
+	@Override
+	public void deleteWorkout(int year, int month, int day, int accountId) {
+		String queryString = "SELECT wd FROM WorkoutDefinition wd WHERE wd.account.id = ?1 AND wd.date = ?2";
+		Date date = new Date(year - 1900, month - 1, day);
+
+		List<WorkoutDefinition> results = new ArrayList<>();
+		results = em.createQuery(queryString, WorkoutDefinition.class).setParameter(1, accountId).setParameter(2, date)
+				.getResultList();
+		
+		for (WorkoutDefinition exercise : results) {
+			em.remove(exercise);
+		}
 	}
 
 }

@@ -25,7 +25,7 @@ import helpers.WorkoutEditor;
 @Controller
 @SessionAttributes("catVars")
 public class UserController {
-	
+
 	@Autowired
 	private WorkoutDao workoutDao;
 
@@ -81,7 +81,8 @@ public class UserController {
 	@RequestMapping(path = "GetUser.do", method = RequestMethod.GET, params = "id")
 	public ModelAndView getUser(@RequestParam("id") int id) {
 		System.out.println("I'm here @ GetUser.do");
-		System.out.println("remove user Step #1: " + workoutDao.getUser(id).getFirstName() + " " + workoutDao.getUser(id).getLastName());
+		System.out.println("remove user Step #1: " + workoutDao.getUser(id).getFirstName() + " "
+				+ workoutDao.getUser(id).getLastName());
 		int status = workoutDao.removeUserAccount(id);
 		return new ModelAndView("user.jsp", "status", status);
 	}
@@ -243,38 +244,63 @@ public class UserController {
 		System.out.println(date.getYear() + " " + date.getMonthInt() + " " + date.getDayInt());
 		model.addAttribute("date", date);
 		model.addAttribute("workout", wd);
-		
+
 		return "editWorkout.jsp";
 	}
 
 	@RequestMapping(path = "EditWorkout.do", method = RequestMethod.POST)
-	public String EditWorkout(@RequestParam("year") String year, @RequestParam("month") String month,
+	public ModelAndView EditWorkout(@RequestParam("year") String year, @RequestParam("month") String month,
 			@RequestParam("day") String day, @RequestParam("accountId") String accountId,
 			@RequestParam("workoutId") String workoutId, @ModelAttribute WorkoutEditor catVars, Model model) {
 
 		System.out.println(catVars.getWorkoutList());
-		
+
 		System.out.println(year + " " + month + " " + day + " " + accountId + " " + workoutId);
 		MyDate date = new MyDate();
 		date.setDate(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
 		Account account = workoutDao.getAccount(Integer.parseInt(accountId));
-		
-		System.out.println(date.getYear() + " " + date.getMonthInt() + " " + date.getDayInt() + " " + account.getId() + " " +
-				Integer.parseInt(workoutId));
+
+		System.out.println(date.getYear() + " " + date.getMonthInt() + " " + date.getDayInt() + " " + account.getId()
+				+ " " + Integer.parseInt(workoutId));
 		workoutDao.editWorkout(date.getYear(), date.getMonthInt(), date.getDayInt(), account.getId(),
 				Integer.parseInt(workoutId), catVars);
 
-//
-//		List<WorkoutDefinition> wd = new ArrayList<>();
-//
-//		wd = workoutDao.getWorkoutForEdit(date.getYear(), date.getMonthInt(), date.getDayInt(), account.getId(),
-//				Integer.parseInt(workoutId));
-//		
-//		model.addAttribute("catVars", new WorkoutEditor());
-//		model.addAttribute("account", account);
-//		model.addAttribute("date", date);
-//		model.addAttribute("workout", wd);
-//		
-		return "editWorkout.jsp";
+		// setup return to calendar view
+		List<WorkoutDefinition> wds = new ArrayList<>();
+		for (int i = 1; i <= date.getDays(); i++) {
+			if (workoutDao.getUserWorkout(date.getYear(), date.getMonthInt(), i, account.getId()) != null) {
+				wds.add(workoutDao.getUserWorkout(date.getYear(), date.getMonthInt(), i, account.getId()));
+			}
+		}
+
+		ModelAndView mv = new ModelAndView("calendar.jsp");
+		mv.addObject("account", account);
+		mv.addObject("date", date);
+		mv.addObject("workouts", wds);
+		return mv;
+	}
+
+	@RequestMapping(path = "RemoveWorkout.do", method = RequestMethod.POST)
+	public ModelAndView removeWorkout(@RequestParam("year") String year, @RequestParam("month") String month,
+			@RequestParam("day") String day, @RequestParam("accountId") String accountId) {
+		MyDate date = new MyDate();
+		date.setDate(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
+		Account account = workoutDao.getAccount(Integer.parseInt(accountId));
+
+		workoutDao.deleteWorkout(date.getYear(), date.getMonthInt(), date.getDayInt(), account.getId());
+
+		// setup return to calendar view
+		List<WorkoutDefinition> wds = new ArrayList<>();
+		for (int i = 1; i <= date.getDays(); i++) {
+			if (workoutDao.getUserWorkout(date.getYear(), date.getMonthInt(), i, account.getId()) != null) {
+				wds.add(workoutDao.getUserWorkout(date.getYear(), date.getMonthInt(), i, account.getId()));
+			}
+		}
+
+		ModelAndView mv = new ModelAndView("calendar.jsp");
+		mv.addObject("account", account);
+		mv.addObject("date", date);
+		mv.addObject("workouts", wds);
+		return mv;
 	}
 }

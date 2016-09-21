@@ -45,6 +45,8 @@ public interface WorkoutDao {
 	public List<WorkoutDefinition> getWorkoutForEdit(int year, int monthInt, int dayInt, int accountId, int workoutId);
 
 	void editWorkout(int year, int month, int day, int accountId, int workoutId, WorkoutEditor catVars);
+
+	public void deleteWorkout(int year, int monthInt, int dayInt, int accountId);
 	
 //	Backlog
 //	5. Add/Remove Exercises from Predefined or User Designed Workout

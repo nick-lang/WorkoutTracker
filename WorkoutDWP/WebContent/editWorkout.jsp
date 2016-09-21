@@ -72,7 +72,6 @@
 		<input type="hidden" name="month" value="${date.monthInt}" />
 		<input type="hidden" name="day" value="${date.dayInt}" />
 		<input type="hidden" name="accountId" value="${account.id}" />
-		<input type="hidden" name="workoutId" value="${workoutId}" />
 		<button type="submit">Delete Workout</button>
 	</form:form>
 </body>
