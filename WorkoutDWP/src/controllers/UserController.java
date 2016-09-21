@@ -78,15 +78,15 @@ public class UserController {
 		return mv;
 	}
 
-	@RequestMapping(path = "GetStarted.do", method = RequestMethod.POST, params = { "username", "password" })
+	@RequestMapping(path = "GetStarted.do", method = RequestMethod.GET, params = { "username", "password" })
 	public ModelAndView getStarted(String username, String password) {
 		System.out.println("I'm here @ GetStarted.do");
 		 User user = workoutDao.getUser(username);
 		 if (user != null) {
-		 System.out.println("Welcome " + user.getFirstName() + " " +
-		 user.getLastName());
+		 System.out.println("Welcome " + user.getFirstName() + " " + user.getLastName());
+		 return new ModelAndView("main.jsp", "user", user);
 		 } else System.out.println("Sorry, you are not authorized to use this system");
-		return new ModelAndView("login.jsp", "user", user);
+		return new ModelAndView("index.html", "user", user);
 	}
 	
 	@RequestMapping(path = "GetUser.do", method = RequestMethod.GET, params = "id")
