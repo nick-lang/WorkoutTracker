@@ -246,13 +246,7 @@ public class UserController {
 		
 		return "editWorkout.jsp";
 	}
-	
-	
-	
-	
-	
-	
-	
+
 	@RequestMapping(path = "EditWorkout.do", method = RequestMethod.POST)
 	public String EditWorkout(@RequestParam("year") String year, @RequestParam("month") String month,
 			@RequestParam("day") String day, @RequestParam("accountId") String accountId,

@@ -32,7 +32,7 @@ public class WorkoutDefinitionTest {
 	    @Test
 	    public void test() throws ParseException {
 	    	WorkoutDefinition wd = em.find(WorkoutDefinition.class, 1);
-	        assertEquals(1, wd.getSet());
+	        assertEquals(1, wd.getExerciseSet());
 	        
 	        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	        Date expected = formatter.parse("1000-01-01");
@@ -40,7 +40,7 @@ public class WorkoutDefinitionTest {
 	        
 	        assertEquals((Integer)1, wd.getExerciseOrdinal());
 	        assertEquals(null, wd.getWeight());
-	        assertEquals(null, wd.getReps());
+	        assertEquals((Integer)3, wd.getReps());
 	        assertEquals(null, wd.getTime());
 	        assertEquals(null, wd.getPace());
 	        assertEquals(null, wd.getDistance());
@@ -54,7 +54,7 @@ public class WorkoutDefinitionTest {
 	        assertEquals(1, workout.getId());
 	        
 	        Exercise exercise = wd.getExercise();
-	        assertEquals(1, exercise.getId());
+	        assertEquals(14, exercise.getId());
 	    }
 
 	    @After
