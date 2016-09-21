@@ -208,7 +208,7 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 	@Override
 	public List<WorkoutDefinition> getWorkoutForEdit(int year, int monthInt, int dayInt, int accountId, int workoutId) {
 		String queryString = "SELECT wd FROM WorkoutDefinition wd WHERE wd.account.id = ?1 AND wd.date = ?2 ORDER BY exerciseOrdinal ASC";
-		Date date = new Date(1000 - 1900, 1 - 1, 1);
+		Date date = new Date(year - 1900, monthInt - 1, dayInt);
 
 		System.out.println("in getWorkoutForEdit");
 

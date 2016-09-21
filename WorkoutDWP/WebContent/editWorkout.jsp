@@ -13,43 +13,50 @@
 	<form:form modelAttribute="catVars" method="post"
 		action="EditWorkout.do">
 		<c:forEach var="w" items="${workout}">
-			<p>
-				${w.exercise.exerciseName }
-				<c:if test="${w.exercise.category.weight}">
-					<form:input path="workoutList[${counter}]" placeholder="weight"
-						size="10" />
-					<c:set var="counter" value="${counter + 1}" scope="page" />
-				</c:if>
-				<c:if test="${w.exercise.category.reps}">
-					<form:input path="workoutList[${counter}]" placeholder="reps"
-						size="10" />
-					<c:set var="counter" value="${counter + 1}" scope="page" />
-				</c:if>
-				<c:if test="${w.exercise.category.time}">
-					<form:input path="workoutList[${counter}]" placeholder="time"
-						size="10" />
-					<c:set var="counter" value="${counter + 1}" scope="page" />
-				</c:if>
-				<c:if test="${w.exercise.category.pace}">
-					<form:input path="workoutList[${counter}]" placeholder="pace"
-						size="10" />
-					<c:set var="counter" value="${counter + 1}" scope="page" />
-				</c:if>
-				<c:if test="${w.exercise.category.distance}">
-					<form:input path="workoutList[${counter}]" placeholder="distance"
-						size="10" />
-					<c:set var="counter" value="${counter + 1}" scope="page" />
-				</c:if>
-				<c:if test="${w.exercise.category.incline}">
-					<form:input path="workoutList[${counter}]" placeholder="incline"
-						size="10" />
-					<c:set var="counter" value="${counter + 1}" scope="page" />
-				</c:if>
-				<c:if test="${w.exercise.category.level}">
-					<form:input path="workoutList[${counter}]" placeholder="level"
-						size="10" />
-					<c:set var="counter" value="${counter + 1}" scope="page" />
-				</c:if>
+			${w.exercise.exerciseName }
+			<p />
+			<c:if test="${w.exercise.category.weight}">
+					weight ${w.weight }
+					<form:input path="workoutList[${counter}]" placeholder="${w.weight }"
+					size="10" />
+				<c:set var="counter" value="${counter + 1}" scope="page" />
+			</c:if>
+			<c:if test="${w.exercise.category.reps}">
+				reps ${w.reps }
+					<form:input path="workoutList[${counter}]" placeholder="${w.reps }"
+					size="10" />
+				<c:set var="counter" value="${counter + 1}" scope="page" />
+			</c:if>
+			<c:if test="${w.exercise.category.time}">
+			time ${w.time }
+				<form:input path="workoutList[${counter}]" placeholder="${w.time }"
+					size="10" />
+				<c:set var="counter" value="${counter + 1}" scope="page" />
+			</c:if>
+			<c:if test="${w.exercise.category.pace}">
+			pace ${w.pace }
+				<form:input path="workoutList[${counter}]" placeholder="${w.pace }"
+					size="10" />
+				<c:set var="counter" value="${counter + 1}" scope="page" />
+			</c:if>
+			<c:if test="${w.exercise.category.distance}">
+			distance ${w.distance }
+				<form:input path="workoutList[${counter}]" placeholder="${w.distance }"
+					size="10" />
+				<c:set var="counter" value="${counter + 1}" scope="page" />
+			</c:if>
+			<c:if test="${w.exercise.category.incline}">
+			incline ${w.incline }
+				<form:input path="workoutList[${counter}]" placeholder="${w.incline }"
+					size="10" />
+				<c:set var="counter" value="${counter + 1}" scope="page" />
+			</c:if>
+			<c:if test="${w.exercise.category.level}">
+			level ${w.level }
+				<form:input path="workoutList[${counter}]" placeholder="${w.level }"
+					size="10" />
+				<c:set var="counter" value="${counter + 1}" scope="page" />
+			</c:if>
 			</p>
 			<c:set var="workoutId" value="${w.workout.id}" scope="page" />
 		</c:forEach>

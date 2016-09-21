@@ -238,7 +238,6 @@ public class UserController {
 		MyDate date = new MyDate();
 		date.setDate(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
 		Account account = workoutDao.getAccount(Integer.parseInt(accountId));
-
 		List<WorkoutDefinition> wd = new ArrayList<>();
 
 		wd = workoutDao.getWorkoutForEdit(date.getYear(), date.getMonthInt(), date.getDayInt(), account.getId(),
@@ -248,6 +247,7 @@ public class UserController {
 
 		model.addAttribute("catVars", new WorkoutEditor());
 		model.addAttribute("account", account);
+		System.out.println(date.getYear() + " " + date.getMonthInt() + " " + date.getDayInt());
 		model.addAttribute("date", date);
 		model.addAttribute("workout", wd);
 		
