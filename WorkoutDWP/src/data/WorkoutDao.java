@@ -13,6 +13,8 @@ public interface WorkoutDao {
 
 	public int createUserAccount(Account account, User user, Address address);
 
+	public void  updateUserAccount(Account account, User user, Address address);
+
 	public Account userHasAccount(String username, String password);
 
 	public boolean userIsAdmin(String username, String password);
@@ -27,16 +29,9 @@ public interface WorkoutDao {
 	
 	public List<User> getAllUsers();
 
-	public int removeUserAccount(Account account);
+	public int removeUserAccount(int id);
 
 	public Account getAccount(String username);
-
-
-//	Rod
-//	1. Verify Login: a. User is Authorized, b. User is an Admin
-//	2. Create/Remove/Update Account: a. User b. Account
-//  ?. Get list of accounts: a. User, b. Account
-
 	
 //	Nick
 //	3. Pick a preDefined Workout

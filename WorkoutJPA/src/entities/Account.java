@@ -3,6 +3,7 @@ package entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,7 +19,7 @@ public class Account {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@OneToOne(mappedBy = "account", fetch=FetchType.EAGER)
+	@OneToOne(mappedBy = "account", fetch=FetchType.EAGER, cascade=CascadeType.REMOVE)
 	private User user;
 
 	private String username;
