@@ -44,8 +44,9 @@
 			type="hidden" name="month" value="${date.monthInt}" /> <input
 			type="hidden" name="day" value="${date.dayInt}" /> <input
 			type="hidden" name="accountId" value="${account.id}" /> <input
-			class="btn btn-lg btn-primary" type="submit" name="back" value="Back" /> <input class="btn btn-lg btn-primary" type="submit"
-			name="next" value="Next" />
+			class="btn btn-lg btn-primary" type="submit" name="back" value="Back" />
+		<input class="btn btn-lg btn-primary" type="submit" name="next"
+			value="Next" />
 	</form>
 
 	<div class="month">
@@ -65,31 +66,33 @@
 			<div class="day">
 				<c:out value="${i}" />
 				<div class="info">
-				
+
 					<c:set var="hasEdit" value="false" />
 					<c:forEach var="w" items="${workouts}">
 						<fmt:formatDate pattern="dd" value="${w.date}" var="fDate" />
 
 						<c:if test="${i == fDate}">
-					<div class="text-uppercase">${w.workout.name}</div>
-					<form id="form" action="GetEditWorkout.do" method="GET">
+							<div class="text-uppercase">${w.workout.name}</div>
+							<form id="form" action="GetEditWorkout.do" method="GET">
 								<input type="hidden" name="year" value="${date.year}" /> <input
 									type="hidden" name="month" value="${date.monthInt}" /> <input
 									type="hidden" name="day" value="${i}" /> <input type="hidden"
 									name="accountId" value="${account.id}" /> <input type="hidden"
-									name="workoutId" value="${w.id}" /> <input class="btn btn-default" type="submit"
-									name="edit" value="View/Edit" />
+									name="workoutId" value="${w.id}" /> <input
+									class="btn btn-default" type="submit" name="edit"
+									value="View/Edit" />
 							</form>
 							<c:set var="hasEdit" value="true" />
 						</c:if>
 					</c:forEach>
 					<c:if test="${hasEdit eq 'false'}">
-						<form id="form" action="GetAddWorkout.do" method="GET" >
+						<form id="form" action="GetAddWorkout.do" method="GET">
 							<input type="hidden" name="year" value="${date.year}" /> <input
 								type="hidden" name="month" value="${date.monthInt}" /> <input
 								type="hidden" name="day" value="${i}" /> <input type="hidden"
-								name="accountId" value="${account.id}" /> <input class="btn btn-default" type="submit"
-								name="add" value="Add Workout" />
+								name="accountId" value="${account.id}" /> <input
+								class="btn btn-default" type="submit" name="add"
+								value="Add Workout" />
 						</form>
 					</c:if>
 				</div>
@@ -103,9 +106,6 @@
 					<div class="day"></div>
 				</c:forEach>
 			</c:if>
-
-
-
 			<c:if test="${((preDays + i) mod 7) == 0}">
 	</div class="week">
 	</c:if>
