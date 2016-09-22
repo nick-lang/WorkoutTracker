@@ -57,30 +57,34 @@
 	<div class="getuser">
 			<h3 class="heading" ><b>Filtered Search</b></h3>
 			<div class="table-responsive">
-		<form:form action="GetFilteredUserList.do" modelAttribute="user" method="POST">
+		<form:form action="GetFilteredUserList.do" modelAttribute="user"  method="POST">
 		<c:if test="${user != null}">
 			<table class="table">
 				<tr>
 					<td><input class = "btn-sm" style="color: green" type="submit" value="Search" /></td>
-					<td>Name:</td>
+					<td>First Name:</td>
 					<td><form:input path="firstName"/></td>
 					<td><form:errors path="firstName" /></td>
 					
+					<td>Last Name:</td>
+					<td><form:input path="lastName"/></td>
+					<td><form:errors path="lastName" /></td>
+					
 					<td>Address:</td>
-					<td><form:input path="address" /></td>
-					<td><form:errors path="address" /></td>
+					<td><form:input path="address.address" /></td>
+					<td><form:errors path="address.address" /></td>
 
 					<td>City:</td>
-					<td><form:input path="city" /></td>
-					<td><form:errors path="city" /></td>
+					<td><form:input path="address.city" /></td>
+					<td><form:errors path="address.city" /></td>
 
 					<td>State:</td>
-					<td><form:input path="state" /></td>
-					<td><form:errors path="state" /></td>
+					<td><form:input path="address.state" /></td>
+					<td><form:errors path="address.state" /></td>
 
 					<td>Zip Code:</td>
-					<td><form:input path="zip" /></td>
-					<td><form:errors path="zip" /></td>
+					<td><form:input path="address.zip" /></td>
+					<td><form:errors path="address.zip" /></td>
 			</table>
 			</c:if>
 		</form:form>
@@ -101,7 +105,6 @@
 						<th>State</th>
 						<th>Zip</th>
 						<th>Phone</th>
-						<th>Location</th>
 						<th></th>
 						<th>Update</th>
 						<th></th>
@@ -111,22 +114,21 @@
 				<tbody >
 					<c:forEach var="user" items="${users}">
 						<tr>
-							<th scope="row">${user.account_id}</th>
+							<th scope="row">${user.accountId}</th>
 							<td>${user.firstName} ${user.lastName}</td>
-							<td>${user.address}</td>
-							<td>${user.city}</td>
-							<td>${user.state}</td>
-							<td>${user.zip}</td>
-							<td>${user.phone}</td>
-							<td><a style="text-align: center;" class="btn-sm" href="${dealer.locationURL}" target="_blank">Map</a></td>
+							<td>${user.address.address}</td>
+							<td>${user.address.city}</td>
+							<td>${user.address.state}</td>
+							<td>${user.address.zip}</td>
+							<td>${user.address.phone}</td>
 							<form action="GetUserEdit.do" method="GET">
 								<td><input type="hidden" value="Edit"></td>
-								<td><input type="hidden" value="${user.account_id}" name="update">
+								<td><input type="hidden" value="${user.accountId}" name="update">
 								<button type="submit" class="btn-sm">Edit</button></td>
 							</form>
 							<form action="GetUserRemove.do" method="GET">
 								<td><input type="hidden" value="Remove"></td>
-								<td><input type="hidden" value="${user.account_id}" name="update">
+								<td><input type="hidden" value="${user.accountId}" name="update">
 								<button style="color: red" type="submit" class="btn-sm">Remove</button></td>
 							</form>
 						</tr>

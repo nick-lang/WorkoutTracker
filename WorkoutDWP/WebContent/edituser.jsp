@@ -12,7 +12,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
 
-    <title>TireDEX</title>
+    <title>Workout Tracker</title>
 
     <!-- Bootstrap CSS
 ================================================== -->
@@ -51,9 +51,9 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </a>
-        <h1><a class="navbar-brand" href="index.html">TireDEX</a></h1>
-        <h3 style="color: green"><b>Edit Dealer Info</b></h3>
-        <form:form action="GetDealerEdit.do" modelAttribute="dealer">
+        <h1><a class="navbar-brand" href="index.html">Workout Tracker</a></h1>
+        <h3 style="color: green"><b>Edit User Info</b></h3>
+        <form:form action="GetUserEdit.do" modelAttribute="user">
             <table>
                 <tr>
                     <td>
@@ -64,103 +64,113 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><b>Business Name:</b>
+                    <td><b>First Name:</b>
                     </td>
                     <td>
-                        <form:input size="35" path="name" />
+                        <form:input size="35" path="firstName" />
                     </td>
                     <td>
-                        <form:errors size="35" path="name" />
+                        <form:errors size="35" path="firstName" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Last Name:</b>
+                    </td>
+                    <td>
+                        <form:input size="35" path="lastName" />
+                    </td>
+                    <td>
+                        <form:errors size="35" path="lastName" />
                     </td>
                 </tr>
                 <tr>
                     <td><b>Address:</b>
                     </td>
                     <td>
-                        <form:input size="35" path="address" />
+                        <form:input size="35" path="address.address" />
                     </td>
                     <td>
-                        <form:errors size="35" path="address" />
+                        <form:errors size="35" path="address.address" />
                     </td>
                 </tr>
                 <tr>
                     <td><b>City:</b>
                     </td>
                     <td>
-                        <form:input size="35" path="city" />
+                        <form:input size="35" path="address.city" />
                     </td>
                     <td>
-                        <form:errors size="35" path="city" />
+                        <form:errors size="35" path="address.city" />
                     </td>
                 </tr>
                 <tr>
                     <td><b>State:</b>
                     </td>
                     <td>
-                        <form:input size="35" path="state" />
+                        <form:input size="35" path="address.state" />
                     </td>
                     <td>
-                        <form:errors size="35" path="state" />
+                        <form:errors size="35" path="address.state" />
                     </td>
                 </tr>
                 <tr>
                     <td><b>Zip Code:</b>
                     </td>
                     <td>
-                        <form:input size="35" path="zip" />
+                        <form:input size="35" path="address.zip" />
                     </td>
                     <td>
-                        <form:errors path="zip" />
+                        <form:errors path="address.zip" />
                     </td>
                 </tr>
                 <tr>
-                    <td><b>Web Site:</b>
+                    <td><b>Email:</b>
                     </td>
                     <td>
-                        <form:input size="35" path="webURL" />
+                        <form:input size="35" path="email" />
                     </td>
                     <td>
-                        <form:errors size="35" path="webURL" />
+                        <form:errors size="35" path="email" />
                     </td>
                 </tr>
                 <tr>
                     <td><b>Phone:</b>
                     </td>
                     <td>
-                        <form:input size="35" path="phone" />
+                        <form:input size="35" path="address.phone" />
                     </td>
                     <td>
-                        <form:errors size="35" path="phone" />
+                        <form:errors size="35" path="address.phone" />
                     </td>
                 </tr>
                 <tr>
-                    <td><b>Latitude:</b>
+                    <td><b>Age:</b>
                     </td>
                     <td>
-                        <form:input size="35" path="latitude" />
+                        <form:input size="35" path="age" />
                     </td>
                     <td>
-                        <form:errors size="35" path="latitude" />
+                        <form:errors size="35" path="age" />
                     </td>
                 </tr>
                 <tr>
-                    <td><b>Longitude:</b>
+                    <td><b>Height:</b>
                     </td>
                     <td>
-                        <form:input size="35" path="longitude" />
+                        <form:input size="35" path="height" />
                     </td>
                     <td>
-                        <form:errors size="35" path="longitude" />
+                        <form:errors size="35" path="height" />
                     </td>
                 </tr>
                 <tr>
-                    <td><b>Location URL:</b>
+                    <td><b>Weight:</b>
                     </td>
                     <td>
-                        <form:input size="180" path="locationURL" />
+                        <form:input size="180" path="weight" />
                     </td>
                     <td>
-                        <form:errors size="180" path="locationURL" />
+                        <form:errors size="180" path="weight" />
                     </td>
                 </tr>
             </table>

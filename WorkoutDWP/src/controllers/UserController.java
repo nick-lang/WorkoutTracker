@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -74,7 +75,6 @@ public class UserController {
 
 		return mv;
 	}
-
 	
 	@RequestMapping(path = "GetUser.do", method = RequestMethod.GET, params = "id")
 	public ModelAndView getUser(@RequestParam("id") int id) {
@@ -134,12 +134,12 @@ public class UserController {
 		System.out.println("New Account username: " + accountNew.getUsername());
 		System.out.println("New Account password: " + accountNew.getPassword());
 		workoutDao.createUserAccount(accountNew, userNew, addressNew);
-		return new ModelAndView("user.jsp", "address", addressNew);
+		return new ModelAndView("main.jsp", "address", addressNew);
 	}
 	
 	@RequestMapping(path = "CreateNewUser.do", method = RequestMethod.GET, params = "close")
 	public ModelAndView createNewUser() {
-		return new ModelAndView("index.html");
+		return new ModelAndView("main.jsp");
 	}
 
 	@RequestMapping(path="GetUserList.do", method=RequestMethod.GET)
@@ -201,6 +201,49 @@ public class UserController {
 		mv.addObject("users", filtered);
 		System.out.println("I'm Here: #4");
 		mv.setViewName("filtereduserlist.jsp");
+		return mv;
+	}
+	
+	@RequestMapping(path="GetUserEdit.do", method=RequestMethod.GET, params = "update")
+	public ModelAndView getUserEdit(@Valid User user, Errors errors, @RequestParam("update") int index) {
+		if (errors.getErrorCount() != 0) {
+			System.out.println("I'm Here: #7");
+			System.out.println("Item: " + index);
+			System.out.println("Object: " + workoutDao.getUser(index));
+			return new ModelAndView("edituser.jsp", "user", workoutDao.getUser(index));
+		}
+		System.out.println("I'm Here: #8");
+		System.out.print("Action: Edit");
+		System.out.println("Item: " + index);
+		System.out.println("Object: " + workoutDao.getUser(index));
+		return new ModelAndView("edituser.jsp", "dealer", workoutDao.getUser(index));
+	}
+
+	@RequestMapping(path="GetUserEdit.do", method=RequestMethod.POST)
+	public String getDealerEdit(@Valid User user, Errors errors) {
+		if (errors.getErrorCount() != 0) {
+			System.out.println("I'm Here: #9");
+			System.out.println("Item: " + user.getAccountId());
+			System.out.println("Object: " + user);
+			return "edituser.jsp";
+		}
+		System.out.println("I'm Here: #10");
+		System.out.println("Item: " + user.getAccountId());
+		System.out.println("Object: " + user);
+		workoutDao.updateUserAccount(user.getAccount(), user, user.getAddress());;
+		return "userlist.jsp";
+	}
+	
+	@RequestMapping(path="GetUserRemove.do", method=RequestMethod.GET, params = "update")
+	public ModelAndView getDealerRemove(@RequestParam("update") int index) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("I'm Here: #11");
+		System.out.print("Action: Remove");
+		System.out.println("Item: " + index);
+		workoutDao.removeUserAccount(index);
+		User user = new User();
+		mv.addObject("user",  user);
+		mv.setViewName("userlist.jsp");
 		return mv;
 	}
 
