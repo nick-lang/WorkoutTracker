@@ -3,7 +3,7 @@ package data;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Stack;
+import java.util.function.Predicate;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -142,6 +142,15 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 		} else
 			System.out.println("No Record Found");
 		return -1;
+	}
+	
+	public List<User> filter(List<User> list, Predicate <User> predicate) {
+		List<User> filteredList = new ArrayList<>();
+		for (User user : list) {
+			if (predicate.test(user))
+				filteredList.add(user);
+		}
+		return filteredList;
 	}
 
 	@Override

@@ -28,6 +28,18 @@ public class UserController {
 
 	@Autowired
 	private WorkoutDao workoutDao;
+	
+	@RequestMapping(path="Do.do", method=RequestMethod.GET)
+	public ModelAndView getDoDo() {
+		User user = new User();
+		Address address = new Address();
+		user.setAddress(address);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("user",user);
+		System.out.println("I'm Here: #0-1");
+		mv.setViewName("main.jsp");
+		return mv;
+	}
 
 	@RequestMapping(path = "GetLogin.do", method = RequestMethod.POST, params = { "username", "password" })
 	public ModelAndView getLogin(String username, String password) {
@@ -83,10 +95,13 @@ public class UserController {
 		System.out.println("I'm here @ GetStarted.do");
 		 User user = workoutDao.getUser(username);
 		 if (user != null) {
-		 System.out.println("Welcome " + user.getFirstName() + " " + user.getLastName());
-		 return new ModelAndView("main.jsp", "user", user);
-		 } else System.out.println("Sorry, you are not authorized to use this system");
-		return new ModelAndView("index.html", "user", user);
+			 System.out.println("Welcome " + user.getFirstName() + " " + user.getLastName());
+			 if (workoutDao.userIsAdmin(username, password)) 
+				 return new ModelAndView("adminuser.jsp", "user", user);
+			 else return new ModelAndView("user.jsp", "user", user);
+		 }
+		 else System.out.println("Sorry, you are not authorized to use this system");
+		    return new ModelAndView("index.html", "user", user);
 	}
 	
 	@RequestMapping(path = "GetUser.do", method = RequestMethod.GET, params = "id")
@@ -116,7 +131,7 @@ public class UserController {
 		return new ModelAndView("user.jsp", "accounts", accounts);
 	}
 
-	@RequestMapping(path = "CreateNewUser.do", method = RequestMethod.GET)
+	@RequestMapping(path = "CreateNewUser.do", method = RequestMethod.POST, params = "submit")
 	public ModelAndView createNewUser(String firstName, String lastName, int age, String gender, Double height,
 			Double weight, String email, String address, String address2, String city, String state, String zip,
 			String phone, String username, String password) {
@@ -149,7 +164,75 @@ public class UserController {
 		workoutDao.createUserAccount(accountNew, userNew, addressNew);
 		return new ModelAndView("user.jsp", "address", addressNew);
 	}
+	
+	@RequestMapping(path = "CreateNewUser.do", method = RequestMethod.GET, params = "close")
+	public ModelAndView createNewUser() {
+		return new ModelAndView("index.html");
+	}
 
+	@RequestMapping(path="GetUserList.do", method=RequestMethod.GET)
+	public ModelAndView getUserList() {
+		ModelAndView mv = new ModelAndView();
+		User user = new User();
+		Address address= new Address();
+		user.setAddress(address);
+		mv.addObject("user",  user);
+		mv.addObject("address", address);
+		System.out.println("I'm Here: #1");
+		System.out.println(workoutDao.getAllUsers());
+		mv.addObject("users",  workoutDao.getAllUsers());
+		mv.setViewName("userlist.jsp");
+		return mv;
+	}
+	
+	@RequestMapping(path="GetUserList.do", method=RequestMethod.GET, params = "user")
+	public ModelAndView getUserList(@RequestParam("user") User user) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("user",  user);
+		mv.addObject("users",  workoutDao.getAllUsers());
+		System.out.println("I'm Here: #2");
+		mv.setViewName("userlist.jsp");
+		return mv;
+	}
+	
+	@RequestMapping(path="GetFilteredUserList.do", method=RequestMethod.GET)
+	public ModelAndView getFilteredUserList() {
+		ModelAndView mv = new ModelAndView();
+		User u = new User();
+		System.out.println("I'm Here: #3");
+		mv.addObject("user",  u);
+		mv.addObject("users",  workoutDao.getAllAccounts());
+		return new ModelAndView("filtereduserlist.jsp", "user", u);
+	}
+	
+	@RequestMapping(path="GetFilteredUserList.do", method=RequestMethod.POST)
+	public ModelAndView getFilteredUserList(User user) {
+		ModelAndView mv = new ModelAndView();
+		List<User> filtered = new ArrayList<>();
+		for (User value : workoutDao.getAllUsers()) {
+			filtered.add(value);
+		}
+		System.out.println("Search Fields: " + user);
+		if(user.getFirstName() != null || user.getFirstName() != "") filtered = workoutDao.filter(filtered, (p) -> p.getFirstName().contains(user.getFirstName()));
+		System.out.println("Search Structure First Name: " + filtered);
+		if(user.getFirstName() != null || user.getLastName() != "") filtered = workoutDao.filter(filtered, (p) -> p.getLastName().contains(user.getLastName()));
+		System.out.println("Search Structure Last Name: " + filtered);
+		if(user.getAddress().getAddress() != null || user.getAddress().getAddress() != "") filtered = workoutDao.filter(filtered, (p) -> p.getAddress().getAddress().contains(user.getAddress().getAddress()));
+		System.out.println("Search Structure Address: " + filtered);
+		if(user.getAddress().getCity() != null || user.getAddress().getCity() != "") filtered = workoutDao.filter(filtered, (p) -> p.getAddress().getCity().contains(user.getAddress().getCity()));
+		System.out.println("Search Structure City: " + filtered);
+		if(user.getAddress().getState() != null || user.getAddress().getState() != "") filtered = workoutDao.filter(filtered, (p) -> p.getAddress().getState().contains(user.getAddress().getState()));
+		System.out.println("Search Structure State: " + filtered);
+		if(user.getAddress().getZip() != null || user.getAddress().getZip() != "") filtered = workoutDao.filter(filtered, (p) -> p.getAddress().getZip().contains(user.getAddress().getZip()));
+		System.out.println("Search Structure Zip: " + filtered);
+		mv.addObject("user", user);
+		mv.addObject("users", filtered);
+		System.out.println("I'm Here: #4");
+		mv.setViewName("filtereduserlist.jsp");
+		return mv;
+	}
+
+	
 	@RequestMapping(path = "GetCalendarData.do", params = "next", method = RequestMethod.GET)
 	public ModelAndView getNextByMonth(@RequestParam("year") String year, @RequestParam("month") String month,
 			@RequestParam("day") String day, @RequestParam("accountId") String accountId) {

@@ -1,3 +1,7 @@
+ @import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
+body{margin-top:20px;}
+.fa-fw {width: 2em;}
+ 
   body {
     padding-top: 40px;
     padding-bottom: 40px;
@@ -5,6 +9,16 @@
   }
   .fullscreen_bg {
     position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-image: url('images/WorkoutTrackerLanding.jpg');
+  }
+  .userscreen_bg {
+    position: scroll;
     top: 0;
     right: 0;
     bottom: 0;
@@ -29,4 +43,76 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+}
+
+/*  bhoechie tab */
+div.bhoechie-tab-container{
+  z-index: 10;
+  background-color: #ffffff;
+  padding: 0 !important;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  border:1px solid #ddd;
+  margin-top: 20px;
+  margin-left: 50px;
+  -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  -moz-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  background-clip: padding-box;
+  opacity: 0.97;
+  filter: alpha(opacity=97);
+}
+div.bhoechie-tab-menu{
+  padding-right: 0;
+  padding-left: 0;
+  padding-bottom: 0;
+}
+div.bhoechie-tab-menu ul.list-group{
+  margin-bottom: 0;
+  list-style:none;
+}
+div.bhoechie-tab-menu ul.list-group>a{
+  margin-bottom: 0;
+  text-align:left;
+}
+div.bhoechie-tab-menu ul.list-group>a .glyphicon,
+div.bhoechie-tab-menu ul.list-group>a .fa {
+  color: #00001a;
+}
+div.bhoechie-tab-menu ul.list-group>a:first-child{
+  border-top-right-radius: 0;
+  -moz-border-top-right-radius: 0;
+}
+div.bhoechie-tab-menu ul.list-group>a:last-child{
+  border-bottom-right-radius: 0;
+  -moz-border-bottom-right-radius: 0;
+}
+div.bhoechie-tab-menu ul.list-group>a.active,
+div.bhoechie-tab-menu ul.list-group>a.active .glyphicon,
+div.bhoechie-tab-menu ul.list-group>a.active .fa{
+  background-color: #004c99;
+  background-image: #5A55A3;
+  color: #ffffff;
+}
+div.bhoechie-tab-menu ul.list-group>a.active:after{
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  margin-top: -13px;
+  border-left: 0;
+  border-bottom: 13px solid transparent;
+  border-top: 13px solid transparent;
+  border-left: 10px solid #5A55A3;
+}
+
+div.bhoechie-tab-content{
+  background-color: #ffffff;
+  /* border: 1px solid #eeeeee; */
+  padding-left: 20px;
+  padding-top: 10px;
+}
+
+div.bhoechie-tab div.bhoechie-tab-content:not(.active){
+  display: none;
 }
