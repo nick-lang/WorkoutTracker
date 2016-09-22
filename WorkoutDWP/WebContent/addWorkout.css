@@ -1,0 +1,17 @@
+.bg {
+	position: fixed; 
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-image: url('images/WorkoutTracker1.jpg');
+	padding-top: 0px;
+}
+
+div {
+	width: 200px;
+	margin-left: 6%;
+	margin-top: 15%;
+}

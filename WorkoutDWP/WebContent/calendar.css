@@ -1,20 +1,20 @@
 .week {
-  display: flex;
-  flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .day {
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 0;
+	flex-grow: 1;
+	flex-shrink: 1;
+	flex-basis: 0;
 }
 
 .week:first-of-type .day:first-of-type {
-  margin-left: 0%;
+	margin-left: 0%;
 }
 
 .week:last-of-type .day:last-of-type {
-  margin-right: 0%;
+	margin-right: 0%;
 }
 
 /* OTHER STYLES */
@@ -22,27 +22,61 @@
 html, body {
   height: 100%;
 }
-
-body {
-  background: linear-gradient(top, #fad961, #f76d1d);
-  background-attachment: fixed;
+ */
+/* body {
+ padding-top: 0px;
 } */
-
 .month {
-  max-width: 630px;
-  margin: 20px auto;
+	max-width: 70%;
+	margin: 20px auto;
+	background: rgba(255, 255, 255, 0.5);
+	
 }
 
 .week {
+	
 }
 
 .day {
-  min-height: 80px;
-  color: #F98909;
-  padding: 5px;
-  min-width: 80px;
-  background-color: transparentize(white, 0.30);
-  box-shadow: 
-    -1px -1px #F9A440, 
-    inset -1px -1px 0 0 #F9A440;
+	min-height: 80px;
+	padding: 5px;
+	min-width: 90px;
+	background-color: transparentize(white, 0.30);
+	box-shadow: -1px -1px #ffffff, inset -1px -1px 0 0 #ffffff;
+
+	color: #000000;
+	clear: left;
+}
+div {
+	font-weight: bold;
+	color: #000000;
+	font-family: "Source Sans Pro";
+	
+}
+
+.bg {
+	/*   position: fixed; */
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-size: cover;
+	background-position: 50% 50%;
+	background-image: url('images/WorkoutTracker2.jpg');
+	/*     background-image: url('images/WorkoutTrackerLanding.jpg'); */
+	padding-top: 0px;
+}
+.info {
+	text-align: center;
+}
+.alignleft {
+	float: left;
+	color: #000000;
+}
+.aligncenter {
+	float: center;
+	color: #000000;
+}
+.valign {
+	vertical-align: middle;
 }
