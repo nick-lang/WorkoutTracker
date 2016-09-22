@@ -62,6 +62,7 @@ public class UserController {
 	public ModelAndView getLogin(String username, String password) {
 		Account account = workoutDao.userHasAccount(username, password);
 		MyDate date = new MyDate();
+
 		List<WorkoutDefinition> wds = new ArrayList<>();
 		for (int i = 1; i <= date.getDays(); i++) {
 			if (workoutDao.getUserWorkout(date.getYear(), date.getMonthInt(), i, account.getId()) != null) {
