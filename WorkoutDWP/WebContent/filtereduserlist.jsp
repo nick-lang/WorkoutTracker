@@ -50,7 +50,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </a>
-    <h1><a class="navbar-brand" href="index.html">TireDEX</a></h1>
+    <h1><a class="navbar-brand" href="index.html">Workout Tracker</a></h1>
 </div>
 
 <body>
@@ -76,8 +76,9 @@
 				</thead>
 				<tbody >
 					<c:forEach var="user" items="${users}">
+					<c:if test="${user.accountId != 1}">
 						<tr>
-							<th scope="row">${user.accountId}</th>
+							<th>${user.accountId}</th>
 							<td>${user.firstName} ${user.lastName}</td>
 							<td>${user.address.address}</td>
 							<td>${user.address.city}</td>
@@ -91,12 +92,13 @@
 							</form>
 							<form action="GetUserRemove.do" method="GET">
 								<td><input type="hidden" value="Remove"></td>
-								<td><input type="hidden" value="${user.accountId}" name="update">
+								<td><input type="hidden" value="${user.accountId}" name="remove">
 								<button style="color: red" type="submit" class="btn-sm">Remove</button></td>
 							</form>
 						</tr>
+						</c:if>
 					</c:forEach>
-                    </tbody>
+				</tbody>
                 </table>
             </div>
         </form>

@@ -57,17 +57,17 @@
             <table>
                 <tr>
                     <td>
-                        <form:input hidden="true" size="35" path="index" />
+                        <form:input hidden="true" size="35" path="accountId" value="${user.accountId}"/>
                     </td>
                     <td>
-                        <form:errors hidden="true" size="35" path="index" />
+                        <form:errors hidden="true" size="35" path="accountId" />
                     </td>
                 </tr>
                 <tr>
                     <td><b>First Name:</b>
                     </td>
                     <td>
-                        <form:input size="35" path="firstName" />
+                        <form:input size="35" path="firstName" value="${user.firstName}"/>
                     </td>
                     <td>
                         <form:errors size="35" path="firstName" />
@@ -77,7 +77,7 @@
                     <td><b>Last Name:</b>
                     </td>
                     <td>
-                        <form:input size="35" path="lastName" />
+                        <form:input size="35" path="lastName" value="${user.lastName}"/>
                     </td>
                     <td>
                         <form:errors size="35" path="lastName" />
@@ -87,7 +87,7 @@
                     <td><b>Address:</b>
                     </td>
                     <td>
-                        <form:input size="35" path="address.address" />
+                        <form:input size="35" path="address.address" value="${user.address.address}"/>
                     </td>
                     <td>
                         <form:errors size="35" path="address.address" />
@@ -97,7 +97,7 @@
                     <td><b>City:</b>
                     </td>
                     <td>
-                        <form:input size="35" path="address.city" />
+                        <form:input size="35" path="address.city" value="${user.address.city}"/>
                     </td>
                     <td>
                         <form:errors size="35" path="address.city" />
@@ -107,7 +107,7 @@
                     <td><b>State:</b>
                     </td>
                     <td>
-                        <form:input size="35" path="address.state" />
+                        <form:input size="35" path="address.state" value="${user.address.state}"/>
                     </td>
                     <td>
                         <form:errors size="35" path="address.state" />
@@ -117,7 +117,7 @@
                     <td><b>Zip Code:</b>
                     </td>
                     <td>
-                        <form:input size="35" path="address.zip" />
+                        <form:input size="35" path="address.zip" value="${user.address.zip}"/>
                     </td>
                     <td>
                         <form:errors path="address.zip" />
@@ -127,7 +127,7 @@
                     <td><b>Email:</b>
                     </td>
                     <td>
-                        <form:input size="35" path="email" />
+                        <form:input size="35" path="email" value="${user.email}"/>
                     </td>
                     <td>
                         <form:errors size="35" path="email" />
@@ -137,7 +137,7 @@
                     <td><b>Phone:</b>
                     </td>
                     <td>
-                        <form:input size="35" path="address.phone" />
+                        <form:input size="35" path="address.phone" value="${user.address.phone}"/>
                     </td>
                     <td>
                         <form:errors size="35" path="address.phone" />
@@ -147,7 +147,7 @@
                     <td><b>Age:</b>
                     </td>
                     <td>
-                        <form:input size="35" path="age" />
+                        <form:input size="35" path="age" value="${user.age}"/>
                     </td>
                     <td>
                         <form:errors size="35" path="age" />
@@ -157,7 +157,7 @@
                     <td><b>Height:</b>
                     </td>
                     <td>
-                        <form:input size="35" path="height" />
+                        <form:input size="35" path="height" value="${user.height}"/>
                     </td>
                     <td>
                         <form:errors size="35" path="height" />
@@ -167,10 +167,20 @@
                     <td><b>Weight:</b>
                     </td>
                     <td>
-                        <form:input size="180" path="weight" />
+                        <form:input size="35" path="weight" value="${user.weight}"/>
                     </td>
                     <td>
-                        <form:errors size="180" path="weight" />
+                        <form:errors size="35" path="weight" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Gender:</b>
+                    </td>
+                    <td>
+                        <form:input size="35" path="gender" value="${user.gender}"/>
+                    </td>
+                    <td>
+                        <form:errors size="35" path="gender" />
                     </td>
                 </tr>
             </table>

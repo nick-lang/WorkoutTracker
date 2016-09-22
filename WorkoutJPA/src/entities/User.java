@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class User {
@@ -19,6 +20,7 @@ public class User {
 	@JoinColumn(name = "account_id")
 	private Account account;
 
+	@NotNull
 	private String gender;
 	private Double height;
 	private Double weight;

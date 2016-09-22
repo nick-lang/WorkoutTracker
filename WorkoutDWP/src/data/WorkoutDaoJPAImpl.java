@@ -49,8 +49,9 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 	}
 
 	public User getUser(int id) {
-		System.out.println("I'm here @ getuser WorkoutDaoJPA");
+		System.out.println("I'm here @ getuser Before WorkoutDaoJPA");
 		User user = em.find(User.class, id);
+		System.out.println("I'm here @ getuser After WorkoutDaoJPA");
 		return user;
 	}
 
@@ -117,14 +118,30 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 		return 1;
 	}
 
-	public void updateUserAccount(Account account, User user, Address address) {
-
-		if (account != null)
-			em.merge(account);
-		if (address != null)
-			em.merge(address);
-		if (user != null)
-			em.merge(user);
+	public void updateUserAccount(User user) {
+		User managedUser = new User();
+		managedUser = getUser(user.getAccountId());
+		managedUser.setFirstName(user.getFirstName());
+		managedUser.setLastName(user.getLastName());
+		managedUser.setAge(user.getAge());
+		managedUser.setEmail(user.getEmail());
+		managedUser.setHeight(user.getHeight());
+		managedUser.setWeight(user.getWeight());
+		managedUser.setGender(user.getGender());
+		
+		Address managedAddress = new Address();
+		managedAddress.setId(user.getAccountId());
+		managedAddress = managedUser.getAddress();
+		managedAddress.setAddress(user.getAddress().getAddress());
+		managedAddress.setCity(user.getAddress().getCity());
+		managedAddress.setState(user.getAddress().getState());
+		managedAddress.setZip(user.getAddress().getZip());
+		managedAddress.setPhone(user.getAddress().getPhone());
+	
+		if (managedAddress != null)
+			em.merge(managedAddress);
+		if (managedUser != null)
+			em.merge(managedUser);
 		System.out.println("Account Record Updated");
 	}
 

@@ -3,6 +3,8 @@ package controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -215,35 +217,35 @@ public class UserController {
 		System.out.print("Action: Edit");
 		System.out.println("Item: " + index);
 		System.out.println("Object: " + workoutDao.getUser(index));
-		return new ModelAndView("edituser.jsp", "dealer", workoutDao.getUser(index));
+		return new ModelAndView("edituser.jsp", "user", workoutDao.getUser(index));
 	}
 
 	@RequestMapping(path="GetUserEdit.do", method=RequestMethod.POST)
-	public String getDealerEdit(@Valid User user, Errors errors) {
+	public ModelAndView getUserEdit(@Valid User user, Errors errors) {
 		if (errors.getErrorCount() != 0) {
 			System.out.println("I'm Here: #9");
 			System.out.println("Item: " + user.getAccountId());
 			System.out.println("Object: " + user);
-			return "edituser.jsp";
+			return getUserEdit(user, errors, user.getAccountId());
 		}
 		System.out.println("I'm Here: #10");
 		System.out.println("Item: " + user.getAccountId());
 		System.out.println("Object: " + user);
-		workoutDao.updateUserAccount(user.getAccount(), user, user.getAddress());;
-		return "userlist.jsp";
+		workoutDao.updateUserAccount(user);
+		return  getUserList();
 	}
 	
-	@RequestMapping(path="GetUserRemove.do", method=RequestMethod.GET, params = "update")
-	public ModelAndView getDealerRemove(@RequestParam("update") int index) {
+	@RequestMapping(path="GetUserRemove.do", method=RequestMethod.GET, params = "remove")
+	public ModelAndView getUserRemove(@RequestParam("remove") int index) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println("I'm Here: #11");
 		System.out.print("Action: Remove");
 		System.out.println("Item: " + index);
 		workoutDao.removeUserAccount(index);
 		User user = new User();
-		mv.addObject("user",  user);
-		mv.setViewName("userlist.jsp");
-		return mv;
+//		mv.addObject("user",  user);
+//		mv.setViewName("userlist.jsp");
+		return getUserList(user);
 	}
 
 	

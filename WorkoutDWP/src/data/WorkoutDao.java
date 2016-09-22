@@ -14,7 +14,7 @@ public interface WorkoutDao {
 
 	public int createUserAccount(Account account, User user, Address address);
 
-	public void  updateUserAccount(Account account, User user, Address address);
+	public void  updateUserAccount(User user);
 
 	public Account userHasAccount(String username, String password);
 
