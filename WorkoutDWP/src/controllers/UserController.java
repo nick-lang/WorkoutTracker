@@ -77,6 +77,26 @@ public class UserController {
 
 		return mv;
 	}
+	@RequestMapping(path = "GetLogin.do", method = RequestMethod.POST, params = { "workouts" })
+	public ModelAndView getLogin(int id) {
+		Account account = workoutDao.getAccount(id);
+		MyDate date = new MyDate();
+
+		List<WorkoutDefinition> wds = new ArrayList<>();
+		for (int i = 1; i <= date.getDays(); i++) {
+			if (workoutDao.getUserWorkout(date.getYear(), date.getMonthInt(), i, account.getId()) != null) {
+				wds.add(workoutDao.getUserWorkout(date.getYear(), date.getMonthInt(), i, account.getId()));
+			}
+		}
+
+		ModelAndView mv = new ModelAndView("calendar.jsp");
+		mv.addObject("account", account);
+		mv.addObject("date", date);
+		mv.addObject("workouts", wds);
+
+		return mv;
+	}
+	
 	
 	@RequestMapping(path = "GetUser.do", method = RequestMethod.GET, params = "id")
 	public ModelAndView getUser(@RequestParam("id") int id) {
