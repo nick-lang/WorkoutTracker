@@ -109,8 +109,7 @@
                       <h1 class="glyphicon glyphicon-tasks" style="font-size:12em;color:#00001a"></h1>
                       <h3 style="margin-top: 0;color:#00001a">Customer Records</h3>
                       <h2 style="margin-top: 0;color:#00001a"><a href="GetUserList.do" class="btn btn-sm btn-primary btn-block" role="button">List Users</a></h2>
-                      <h2 style="margin-top: 0;color:#00001a"><a href="" class="btn btn-sm btn-primary btn-block" role="button">Update User Profile</a></h2>
-                      <h2 style="margin-top: 0;color:#00001a"><a href="" class="btn btn-sm btn-primary btn-block" role="button">Create new User Profile</a></h2>
+                      <h2 style="margin-top: 0;color:#00001a"><a href="newuser.jsp" class="btn btn-sm btn-primary btn-block" role="button">Create new User Profile</a></h2>
                       <h2 style="margin-top: 0;color:#00001a"><a href="" class="btn btn-sm btn-primary btn-block" role="button">Review User Workout</a></h2>
                     </center>
                 </div>
