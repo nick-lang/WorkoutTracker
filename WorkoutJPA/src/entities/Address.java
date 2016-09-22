@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Address {
@@ -17,11 +18,20 @@ public class Address {
 	@OneToMany(mappedBy = "address", fetch=FetchType.EAGER)
 	private List<User> users;
 
+	@NotNull
 	private String address;
 	private String address2;
+	
+	@NotNull
 	private String city;
+	
+	@NotNull
 	private String state;
+	
+	@NotNull
 	private String zip;
+	
+	@NotNull
 	private String phone;
 
 	public int getId() {

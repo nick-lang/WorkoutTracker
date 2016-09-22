@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Account {
@@ -22,7 +24,12 @@ public class Account {
 	@OneToOne(mappedBy = "account", fetch=FetchType.EAGER, cascade=CascadeType.REMOVE)
 	private User user;
 
+	@NotNull
+	@Size(min=3, max=20)
 	private String username;
+	
+	@NotNull
+	@Size(min=3, max=20)
 	private String password;
 
 	@OneToMany(mappedBy = "account")

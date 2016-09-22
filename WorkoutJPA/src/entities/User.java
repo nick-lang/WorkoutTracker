@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class User {
@@ -21,6 +22,7 @@ public class User {
 	private Account account;
 
 	@NotNull
+	@Size(min=1, max=1)
 	private String gender;
 	private Double height;
 	private Double weight;
@@ -29,6 +31,8 @@ public class User {
 	private String firstName;
 	@Column(name = "last_name")
 	private String lastName;
+	
+	@NotNull
 	private int age;
 	private String email;
 
