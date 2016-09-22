@@ -109,6 +109,8 @@
 						<th>Update</th>
 						<th></th>
 						<th>Remove</th>
+						<th></th>
+						<th>Workouts</th>
 					</tr>
 				</thead>
 				<tbody >
@@ -131,6 +133,11 @@
 								<td><input type="hidden" value="Remove"></td>
 								<td><input type="hidden" value="${user.accountId}" name="remove">
 								<button style="color: red" type="submit" class="btn-sm">Remove</button></td>
+							</form>
+							<form action="GetLogin.do" method="GET">
+								<td><input type="hidden" value="Workouts"></td>
+								<td><input type="hidden" value="${user.accountId}" name="workouts">
+								<button style="color: blue" type="submit" class="btn-sm">Edit</button></td>
 							</form>
 						</tr>
 						</c:if>
