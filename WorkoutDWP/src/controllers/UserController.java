@@ -80,6 +80,7 @@ public class UserController {
 	
 	@RequestMapping(path = "GetLogin.do", method = RequestMethod.GET, params="workouts")
 	public ModelAndView getLogin(@RequestParam("workouts") int id) {
+		System.out.println("Hallo!");
 		Account account = workoutDao.getAccount(id);
 		MyDate date = new MyDate();
 

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,6 +50,10 @@
 			</form>
 			<br/>
 		</c:forEach>
+	<form:form method="GET" action="GetLogin.do">
+		<input type="hidden" name="workouts" value="${account.id}" />
+		<button class="btn btn-lg btn-primary " type="submit">Cancel</button>
+	</form:form>
 	</div>
 </body>
 </html>
