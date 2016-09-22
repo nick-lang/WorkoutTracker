@@ -42,11 +42,24 @@ public class UserController {
 		return mv;
 	}
 
+	@RequestMapping(path = "GetStarted.do", method = RequestMethod.GET, params = { "username", "password" })
+	public ModelAndView getStarted(String username, String password) {
+		System.out.println("I'm here @ GetStarted.do");
+		User user = workoutDao.getUser(username);
+		if (user != null) {
+			System.out.println("Welcome " + user.getFirstName() + " " + user.getLastName());
+			if (workoutDao.userIsAdmin(username, password)) 
+				return new ModelAndView("adminuser.jsp", "user", user);
+			else  return getLogin(username, password);
+		}
+		else System.out.println("Sorry, you are not authorized to use this system");
+		return new ModelAndView("index.html", "user", user);
+	}
+	
 	@RequestMapping(path = "GetLogin.do", method = RequestMethod.POST, params = { "username", "password" })
 	public ModelAndView getLogin(String username, String password) {
 		Account account = workoutDao.userHasAccount(username, password);
 		MyDate date = new MyDate();
-
 		List<WorkoutDefinition> wds = new ArrayList<>();
 		for (int i = 1; i <= date.getDays(); i++) {
 			if (workoutDao.getUserWorkout(date.getYear(), date.getMonthInt(), i, account.getId()) != null) {
@@ -54,56 +67,12 @@ public class UserController {
 			}
 		}
 
-		// if (wds.size() != 0) {
-		// System.out.println(wds.get(0).getSet());
-		// }
-
-		// Boolean admin = workoutDao.userIsAdmin(username, password);
-		// System.out.println("Test #1");
-		// if (account != null) {
-		// System.out.println("Welcome " + account.getUser().getFirstName() + "
-		// " + account.getUser().getLastName());
-		// if (admin) System.out.println("You are an Admin");
-		// } else System.out.println("Sorry, you are not authorized to use this
-		// system");
-		//
-		// User user = workoutDao.getUser(username);
-		// System.out.println("Test #2");
-		// if (user != null) {
-		// System.out.println("Welcome " + user.getFirstName() + " " +
-		// user.getLastName());
-		// } else System.out.println("Sorry, you are not authorized to use this
-		// system");
-		//
-		// account = workoutDao.getAccount(username);
-		// System.out.println("Test #3");
-		// if (user != null) {
-		// System.out.println("Welcome " + account.getUser().getFirstName() + "
-		// " + account.getUser().getLastName());
-		// } else System.out.println("Sorry, you are not authorized to use this
-		// system");
-
 		ModelAndView mv = new ModelAndView("calendar.jsp");
 		mv.addObject("account", account);
 		mv.addObject("date", date);
 		mv.addObject("workouts", wds);
 
 		return mv;
-	}
-
-	@RequestMapping(path = "GetStarted.do", method = RequestMethod.GET, params = { "username", "password" })
-	public ModelAndView getStarted(String username, String password) {
-		System.out.println("I'm here @ GetStarted.do");
-		 User user = workoutDao.getUser(username);
-		 System.out.println(user.getFirstName() + " " + user.getLastName());
-		 if (user != null) {
-			 System.out.println("Welcome " + user.getFirstName() + " " + user.getLastName());
-			 if (workoutDao.userIsAdmin(username, password)) 
-				 return new ModelAndView("adminuser.jsp", "user", user);
-			 else return new ModelAndView("user.jsp", "user", user);
-		 }
-		 else System.out.println("Sorry, you are not authorized to use this system");
-		    return new ModelAndView("index.html", "user", user);
 	}
 	
 	@RequestMapping(path = "GetUser.do", method = RequestMethod.GET, params = "id")

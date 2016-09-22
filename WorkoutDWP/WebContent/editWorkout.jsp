@@ -6,58 +6,109 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Bootstrap CSS
+   ================================================== -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap.css">
+
+<!-- Animate CSS
+   ================================================== -->
+<link rel="stylesheet" href="css/animate.min.css">
+
+<!-- Font Icons CSS
+   ================================================== -->
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="css/ionicons.min.css">
+
+<!-- Main CSS
+   ================================================== -->
+<link rel="stylesheet" href="css/bootstrap.offcanvas.min.css">
+<link rel="stylesheet" href="css/bootstrap.offcanvas.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="myStyles.css">
+
+<!-- Google web font 
+   ================================================== -->
+<link rel='stylesheet' href="css/font-google.css">
+
+<!-- Header section
+================================================== -->
+<LINK href="editWorkout.css" rel="stylesheet" type="text/css">
 <title>Edit Workout</title>
 </head>
-<body>
+<body class="bg">
 	<c:set var="counter" value="${counter = 0}" scope="page" />
+
 	<form:form modelAttribute="catVars" method="post"
 		action="EditWorkout.do">
+
 		<c:forEach var="w" items="${workout}">
-			${w.exercise.exerciseName }
-			<p />
-			<c:if test="${w.exercise.category.weight}">
-					weight ${w.weight }
+
+			<h4 style="text-transform: capitalize">${w.exercise.exerciseName }</h4>
+			<div class="row">
+
+					<c:if test="${w.exercise.category.weight}">
+				<div class="col-md-1 text-center">
+						<h5 style="text-transform: capitalize">weight ${w.weight }</h5>
+						<form:input path="workoutList[${counter}]"
+							placeholder="${w.weight }" size="10" required="required" />
+						<c:set var="counter" value="${counter + 1}" scope="page" />
+				</div>
+					</c:if>
+					<c:if test="${w.exercise.category.reps}">
+				<div class="col-md-1 text-center">
+						<h5 style="text-transform: capitalize">reps ${w.reps }</h5>
+						<form:input path="workoutList[${counter}]"
+							placeholder="${w.reps }" size="10" required="required" />
+						<c:set var="counter" value="${counter + 1}" scope="page" />
+				</div>
+					</c:if>
+				<c:if test="${w.exercise.category.time}">
+				<div class="col-md-1 text-center">
+					<h5 style="text-transform: capitalize">time ${w.time }</h5>
+					<form:input path="workoutList[${counter}]" placeholder="${w.time }"
+						size="10" required="required" />
+					<c:set var="counter" value="${counter + 1}" scope="page" />
+				</div>
+				</c:if>
+				<c:if test="${w.exercise.category.pace}">
+				<div class="col-md-1 text-center">
+					<h5 style="text-transform: capitalize">pace ${w.pace }</h5>
+					<form:input path="workoutList[${counter}]" placeholder="${w.pace }"
+						size="10" required="required" />
+					<c:set var="counter" value="${counter + 1}" scope="page" />
+				</div>
+				</c:if>
+				<c:if test="${w.exercise.category.distance}">
+				<div class="col-md-1 text-center">
+					<h5 style="text-transform: capitalize">distance ${w.distance }</h5>
 					<form:input path="workoutList[${counter}]"
-					placeholder="${w.weight }" size="10" />
-				<c:set var="counter" value="${counter + 1}" scope="page" />
-			</c:if>
-			<c:if test="${w.exercise.category.reps}">
-				reps ${w.reps }
-					<form:input path="workoutList[${counter}]" placeholder="${w.reps }"
-					size="10" />
-				<c:set var="counter" value="${counter + 1}" scope="page" />
-			</c:if>
-			<c:if test="${w.exercise.category.time}">
-			time ${w.time }
-				<form:input path="workoutList[${counter}]" placeholder="${w.time }"
-					size="10" />
-				<c:set var="counter" value="${counter + 1}" scope="page" />
-			</c:if>
-			<c:if test="${w.exercise.category.pace}">
-			pace ${w.pace }
-				<form:input path="workoutList[${counter}]" placeholder="${w.pace }"
-					size="10" />
-				<c:set var="counter" value="${counter + 1}" scope="page" />
-			</c:if>
-			<c:if test="${w.exercise.category.distance}">
-			distance ${w.distance }
-				<form:input path="workoutList[${counter}]"
-					placeholder="${w.distance }" size="10" />
-				<c:set var="counter" value="${counter + 1}" scope="page" />
-			</c:if>
-			<c:if test="${w.exercise.category.incline}">
-			incline ${w.incline }
-				<form:input path="workoutList[${counter}]"
-					placeholder="${w.incline }" size="10" />
-				<c:set var="counter" value="${counter + 1}" scope="page" />
-			</c:if>
-			<c:if test="${w.exercise.category.level}">
-			level ${w.level }
-				<form:input path="workoutList[${counter}]" placeholder="${w.level }"
-					size="10" />
-				<c:set var="counter" value="${counter + 1}" scope="page" />
-			</c:if>
-			</p>
+						placeholder="${w.distance }" size="10" required="required" />
+					<c:set var="counter" value="${counter + 1}" scope="page" />
+				</div>
+				</c:if>
+				<c:if test="${w.exercise.category.incline}">
+				<div class="col-md-1 text-center">
+					<h6 style="text-transform: capitalize">incline ${w.incline }</h6>
+					<form:input path="workoutList[${counter}]"
+						placeholder="${w.incline }" size="10" required="required" />
+					<c:set var="counter" value="${counter + 1}" scope="page" />
+				</div>
+				</c:if>
+				<c:if test="${w.exercise.category.level}">
+				<div class="col-md-1 text-center">
+					<h5 style="text-transform: capitalize">level ${w.level }</h5>
+					<form:input path="workoutList[${counter}]"
+						placeholder="${w.level }" size="10" required="required" />
+					<c:set var="counter" value="${counter + 1}" scope="page" />
+				</div>
+				</c:if>
+				
+
+			</div>
+
+			<br />
+			<br />
 			<c:set var="workoutId" value="${w.workout.id}" scope="page" />
 		</c:forEach>
 		<input type="hidden" name="year" value="${date.year}" />
@@ -65,14 +116,21 @@
 		<input type="hidden" name="day" value="${date.dayInt}" />
 		<input type="hidden" name="accountId" value="${account.id}" />
 		<input type="hidden" name="workoutId" value="${workoutId}" />
-		<button type="submit">Submit</button>
+
+		<button class="btn btn-lg btn-primary " type="submit">Submit</button>
+
 	</form:form>
+	<br />
 	<form:form method="post" action="RemoveWorkout.do">
 		<input type="hidden" name="year" value="${date.year}" />
 		<input type="hidden" name="month" value="${date.monthInt}" />
 		<input type="hidden" name="day" value="${date.dayInt}" />
 		<input type="hidden" name="accountId" value="${account.id}" />
-		<button type="submit">Delete Workout</button>
+
+		<button class="btn btn-lg btn-primary " type="submit">Delete
+			Workout</button>
+
 	</form:form>
+
 </body>
 </html>
