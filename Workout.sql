@@ -246,6 +246,7 @@ COMMIT;
 START TRANSACTION;
 USE `workoutdb`;
 INSERT INTO `account` (`id`, `username`, `password`) VALUES (1, 'admin', 'admin');
+INSERT INTO `account` (`id`, `username`, `password`) VALUES (DEFAULT, NULL, NULL);
 
 COMMIT;
 
