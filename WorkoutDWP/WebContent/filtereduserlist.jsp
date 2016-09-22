@@ -54,59 +54,48 @@
 </div>
 
 <body>
-    <div class="getfiltereddealer">
-        <form action="GetFilteredDealerList.do" method="GET" modelAttribute="dealer">
-            <strong><h3 class="heading-title">Local Tire Dealers and Installation Service Centers</h3></strong>
-            <div class="table-responsive">
-                <table class="table table-striped table-hover">
-                    <thead class="thead-inverse">
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Address</th>
-                            <th>City</th>
-                            <th>State</th>
-                            <th>Zip</th>
-                            <th>Phone</th>
-                            <th>Location</th>
-                            <th></th>
-                            <th>Update</th>
-                            <th></th>
-                            <th>Remove</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach var="dealer" items="${dealers}">
-                            <tr>
-                                <th scope="row">${dealer.index}</th>
-                                <td>${dealer.name}</td>
-                                <td>${dealer.address}</td>
-                                <td>${dealer.city}</td>
-                                <td>${dealer.state}</td>
-                                <td>${dealer.zip}</td>
-                                <td>${dealer.phone}</td>
-                                <td><a style="text-align: center;" class="btn-sm" href="${dealer.locationURL}" target="_blank">Map</a>
-                                </td>
-                                <form action="GetDealerEdit.do" method="GET">
-                                    <td>
-                                        <input type="hidden" value="Edit">
-                                    </td>
-                                    <td>
-                                        <input type="hidden" value="${dealer.index}" name="update">
-                                        <button type="submit" class="btn-sm">Edit</button>
-                                    </td>
-                                </form>
-                                <form action="GetDealerRemove.do" method="GET">
-                                    <td>
-                                        <input type="hidden" value="Remove">
-                                    </td>
-                                    <td>
-                                        <input type="hidden" value="${dealer.index}" name="update">
-                                        <button style="color: red" type="submit" class="btn-sm">Remove</button>
-                                    </td>
-                                </form>
-                            </tr>
-                        </c:forEach>
+    <div class="getfiltereduser">
+        <form action="GetFilteredUserList.do" method="GET" modelAttribute="user">
+ 		<strong><h3 class="heading-title">Customer Membership List</h3></strong>
+			<div class="table-responsive">
+			<table class="table table-striped table-hover">
+				<thead class="thead-inverse">
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Address</th>
+						<th>City</th>
+						<th>State</th>
+						<th>Zip</th>
+						<th>Phone</th>
+						<th></th>
+						<th>Update</th>
+						<th></th>
+						<th>Remove</th>
+					</tr>
+				</thead>
+				<tbody >
+					<c:forEach var="user" items="${users}">
+						<tr>
+							<th scope="row">${user.accountId}</th>
+							<td>${user.firstName} ${user.lastName}</td>
+							<td>${user.address.address}</td>
+							<td>${user.address.city}</td>
+							<td>${user.address.state}</td>
+							<td>${user.address.zip}</td>
+							<td>${user.address.phone}</td>
+							<form action="GetUserEdit.do" method="GET">
+								<td><input type="hidden" value="Edit"></td>
+								<td><input type="hidden" value="${user.accountId}" name="update">
+								<button type="submit" class="btn-sm">Edit</button></td>
+							</form>
+							<form action="GetUserRemove.do" method="GET">
+								<td><input type="hidden" value="Remove"></td>
+								<td><input type="hidden" value="${user.accountId}" name="update">
+								<button style="color: red" type="submit" class="btn-sm">Remove</button></td>
+							</form>
+						</tr>
+					</c:forEach>
                     </tbody>
                 </table>
             </div>
