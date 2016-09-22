@@ -50,9 +50,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </a>
-    <h1><a class="navbar-brand" href="index.html">Workout Tracker</a></h1>
+    <h1><a class="navbar-brand" href="adminuser.jsp">Workout Tracker</a></h1>
 </div>
-
 <body>
     <div class="getfiltereduser">
         <form action="GetFilteredUserList.do" method="GET" modelAttribute="user">
@@ -69,9 +68,13 @@
 						<th>Zip</th>
 						<th>Phone</th>
 						<th></th>
+						<th></th>
+						<th></th>
 						<th>Update</th>
 						<th></th>
 						<th>Remove</th>
+						<th></th>
+						<th>Workouts</th>
 					</tr>
 				</thead>
 				<tbody >
@@ -86,6 +89,11 @@
 							<td>${user.address.zip}</td>
 							<td>${user.address.phone}</td>
 							<form action="GetUserEdit.do" method="GET">
+								<td><input type="hidden" value="stealth"></td>
+								<td><input type="hidden" value="${user.accountId}" name="stealth">
+								<button style="visibility:hidden" "type="submit" class="btn-sm"></button></td>
+							</form>
+							<form action="GetUserEdit.do" method="GET">
 								<td><input type="hidden" value="Edit"></td>
 								<td><input type="hidden" value="${user.accountId}" name="update">
 								<button type="submit" class="btn-sm">Edit</button></td>
@@ -95,6 +103,11 @@
 								<td><input type="hidden" value="${user.accountId}" name="remove">
 								<button style="color: red" type="submit" class="btn-sm">Remove</button></td>
 							</form>
+							<form action="GetLogin.do" method="GET">
+								<td><input type="hidden" value="Workouts"></td>
+								<td><input type="hidden" value="${user.accountId}" name="workouts">
+								<button style="color: blue" type="submit" class="btn-sm">Edit</button></td>
+							</form>
 						</tr>
 						</c:if>
 					</c:forEach>
@@ -102,7 +115,7 @@
                 </table>
             </div>
         </form>
-    </div>
+ </div>
 </body>
 
 </html>

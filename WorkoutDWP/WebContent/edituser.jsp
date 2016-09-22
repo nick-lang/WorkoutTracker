@@ -51,7 +51,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </a>
-        <h1><a class="navbar-brand" href="index.html">Workout Tracker</a></h1>
+        <h1><a class="navbar-brand" href="adminuser.jsp">Workout Tracker</a></h1>
         <h3 style="color: green"><b>Edit User Info</b></h3>
         <form:form action="GetUserEdit.do" modelAttribute="user">
             <table>

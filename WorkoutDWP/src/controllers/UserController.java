@@ -77,8 +77,9 @@ public class UserController {
 
 		return mv;
 	}
-	@RequestMapping(path = "GetLogin.do", method = RequestMethod.POST, params = { "workouts" })
-	public ModelAndView getLogin(int id) {
+	
+	@RequestMapping(path = "GetLogin.do", method = RequestMethod.GET, params="workouts")
+	public ModelAndView getLogin(@RequestParam("workouts") int id) {
 		Account account = workoutDao.getAccount(id);
 		MyDate date = new MyDate();
 
