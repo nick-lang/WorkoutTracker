@@ -174,14 +174,15 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 	public WorkoutDefinition getUserWorkout(int y, int m, int d, int accountId) {
 		String queryString = "SELECT wd FROM WorkoutDefinition wd WHERE wd.account.id = ?1 AND wd.date = ?2 AND wd.exerciseOrdinal = 1";
 		Date date = new Date(y - 1900, m - 1, d);
-		// System.out.println("" + date);
+
 		try {
+			 System.out.println("sup!");
 			WorkoutDefinition result = em.createQuery(queryString, WorkoutDefinition.class).setParameter(1, accountId)
 					.setParameter(2, date).getSingleResult();
-			// System.out.println("Found!");
-			// System.out.println(result.getSet());
+
 			return result;
 		} catch (NoResultException e) {
+			 System.err.println(e);
 			return null;
 		}
 
@@ -243,6 +244,9 @@ public class WorkoutDaoJPAImpl implements WorkoutDao {
 		results = em.createQuery(queryString, WorkoutDefinition.class).setParameter(1, accountId).setParameter(2, date)
 				.getResultList();
 		System.out.println(results);
+		for (WorkoutDefinition result : results) {
+			System.out.println(result.getWeight());
+		}
 		return results;
 	}
 
