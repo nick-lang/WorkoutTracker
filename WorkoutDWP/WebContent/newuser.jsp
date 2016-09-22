@@ -23,8 +23,9 @@
    ================================================== -->
                     <link rel="stylesheet" href="css/animate.min.css">
 
-                    <!-- Font Icons CSS
+                   <!-- Font Icons CSS
    ================================================== -->
+   					<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
                     <link rel="stylesheet" href="css/font-awesome.min.css">
                     <link rel="stylesheet" href="css/ionicons.min.css">
 
@@ -52,16 +53,18 @@
                     </a>
                 </div>
 
-                <body class="usrscreen_bg">
+                <body class="userscreen_bg">
                     <div class="container">
                         <div class="row">
                             <div class="modal-content">
 
+                                <form method="GET" action="CreateNewUser.do">
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                                    <button style="color:red" type="input" name="close" lass="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
                                     <h1><a class="navbar-brand" href="index.html">Workout Tracker</a></h1>
                                     <h4 class="modal-title" style="text-align: center">Create a New Account!</h4>
                                 </div>
+                                </form>
 
                                 <form method="POST" action="CreateNewUser.do">
                                     <div class="modal-body">
@@ -87,7 +90,7 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="address2">Suite / Box / Appartment </label>
-                                                    <input type="text" class="form-control" required="" name="address2" placeholder="" />
+                                                    <input type="text" class="form-control" name="address2" placeholder="" />
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -174,11 +177,13 @@
                                             <div class="modal-footer">
                                                 <input type="hidden" name="isEmpty" value="">
                                                 <button type="input" name="submit" value="newAccount" class="btn btn-success btn-icon"><i class="fa fa-check"></i> Create My Account</button>
-                                                <button type="button" class="btn btn-default btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Cancel</button>
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+                    </form>
+                </div>
+            </div>
+        </div>
                                 <!-- Footer section
 ================================================== -->
 

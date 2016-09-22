@@ -1,6 +1,7 @@
 package data;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import entities.Account;
 import entities.Address;
@@ -32,6 +33,8 @@ public interface WorkoutDao {
 	public int removeUserAccount(int id);
 
 	public Account getAccount(String username);
+	
+	public List<User> filter(List<User> list, Predicate <User> predicate);
 	
 //	Nick
 //	3. Pick a preDefined Workout
