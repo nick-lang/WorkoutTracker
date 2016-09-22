@@ -52,7 +52,7 @@ public class UserController {
 			System.out.println("Welcome " + user.getFirstName() + " " + user.getLastName());
 			if (workoutDao.userIsAdmin(username, password)) 
 				return new ModelAndView("adminuser.jsp", "user", user);
-			else  return getLogin(username, password);
+			else return getLogin(username, password);
 		}
 		else System.out.println("Sorry, you are not authorized to use this system");
 		return new ModelAndView("index.html", "user", user);
@@ -274,6 +274,7 @@ public class UserController {
 	@RequestMapping(path = "GetCalendarData.do", params = "next", method = RequestMethod.GET)
 	public ModelAndView getNextByMonth(@RequestParam("year") String year, @RequestParam("month") String month,
 			@RequestParam("day") String day, @RequestParam("accountId") String accountId) {
+		System.out.println("I'm Here: #12");
 		MyDate date = new MyDate();
 		date.setNextMonth(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
 		Account account = workoutDao.getAccount(Integer.parseInt(accountId));
@@ -295,6 +296,7 @@ public class UserController {
 	@RequestMapping(path = "GetCalendarData.do", params = "back", method = RequestMethod.GET)
 	public ModelAndView getBackByMonth(@RequestParam("year") String year, @RequestParam("month") String month,
 			@RequestParam("day") String day, @RequestParam("accountId") String accountId) {
+		System.out.println("I'm Here: #13");
 		System.out.println(year + month + day + accountId);
 		MyDate date = new MyDate();
 		date.setPrevMonth(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
@@ -317,6 +319,7 @@ public class UserController {
 	@RequestMapping(path = "GetAddWorkout.do", method = RequestMethod.GET)
 	public ModelAndView getAddForm(@RequestParam("year") String year, @RequestParam("month") String month,
 			@RequestParam("day") String day, @RequestParam("accountId") String accountId) {
+		System.out.println("I'm Here: #14");
 		System.out.println(year + month + day + accountId);
 		MyDate date = new MyDate();
 		date.setDate(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
@@ -336,6 +339,7 @@ public class UserController {
 	public ModelAndView setWorkout(@RequestParam("year") String year, @RequestParam("month") String month,
 			@RequestParam("day") String day, @RequestParam("accountId") String accountId,
 			@RequestParam("workoutId") String workoutId) {
+		System.out.println("I'm Here: #15");
 		// System.out.println(year + month + day + accountId);
 		MyDate date = new MyDate();
 		date.setDate(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
@@ -363,6 +367,8 @@ public class UserController {
 			@RequestParam("day") String day, @RequestParam("accountId") String accountId,
 			@RequestParam("workoutId") String workoutId, Model model) {
 
+		System.out.println("I'm Here: #16");
+		System.out.println("AccountID: " + accountId);
 		MyDate date = new MyDate();
 		date.setDate(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
 		Account account = workoutDao.getAccount(Integer.parseInt(accountId));
@@ -370,6 +376,12 @@ public class UserController {
 
 		wd = workoutDao.getWorkoutForEdit(date.getYear(), date.getMonthInt(), date.getDayInt(), account.getId(),
 				Integer.parseInt(workoutId));
+		
+		
+		for (WorkoutDefinition w : wd) {
+			System.out.println(w.getWeight());
+		}
+		
 
 		model.addAttribute("catVars", new WorkoutEditor());
 		model.addAttribute("account", account);
@@ -385,6 +397,7 @@ public class UserController {
 			@RequestParam("day") String day, @RequestParam("accountId") String accountId,
 			@RequestParam("workoutId") String workoutId, @ModelAttribute WorkoutEditor catVars, Model model) {
 
+		System.out.println("I'm Here: #17");
 		System.out.println(catVars.getWorkoutList());
 
 		System.out.println(year + " " + month + " " + day + " " + accountId + " " + workoutId);
@@ -415,6 +428,7 @@ public class UserController {
 	@RequestMapping(path = "RemoveWorkout.do", method = RequestMethod.POST)
 	public ModelAndView removeWorkout(@RequestParam("year") String year, @RequestParam("month") String month,
 			@RequestParam("day") String day, @RequestParam("accountId") String accountId) {
+		System.out.println("I'm Here: #18");
 		MyDate date = new MyDate();
 		date.setDate(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
 		Account account = workoutDao.getAccount(Integer.parseInt(accountId));

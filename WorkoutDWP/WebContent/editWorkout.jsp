@@ -49,57 +49,57 @@
 
 					<c:if test="${w.exercise.category.weight}">
 				<div class="col-md-1 text-center">
-						<h5 style="text-transform: capitalize">weight ${w.weight }</h5>
-						<form:input path="workoutList[${counter}]"
-							placeholder="${w.weight }" size="10" required="required" />
+						<h5 style="text-transform: capitalize">weight</h5>
+						<form:input class="input" path="workoutList[${counter}]"
+							value="${w.weight }" size="10" required="required" />
 						<c:set var="counter" value="${counter + 1}" scope="page" />
 				</div>
 					</c:if>
 					<c:if test="${w.exercise.category.reps}">
 				<div class="col-md-1 text-center">
-						<h5 style="text-transform: capitalize">reps ${w.reps }</h5>
-						<form:input path="workoutList[${counter}]"
-							placeholder="${w.reps }" size="10" required="required" />
+						<h5 style="text-transform: capitalize">reps</h5>
+						<form:input class="input" path="workoutList[${counter}]"
+							value="${w.reps }" size="10" required="required" />
 						<c:set var="counter" value="${counter + 1}" scope="page" />
 				</div>
 					</c:if>
 				<c:if test="${w.exercise.category.time}">
 				<div class="col-md-1 text-center">
-					<h5 style="text-transform: capitalize">time ${w.time }</h5>
-					<form:input path="workoutList[${counter}]" placeholder="${w.time }"
+					<h5 style="text-transform: capitalize">time</h5>
+					<form:input class="input" path="workoutList[${counter}]" value="${w.time }"
 						size="10" required="required" />
 					<c:set var="counter" value="${counter + 1}" scope="page" />
 				</div>
 				</c:if>
 				<c:if test="${w.exercise.category.pace}">
 				<div class="col-md-1 text-center">
-					<h5 style="text-transform: capitalize">pace ${w.pace }</h5>
-					<form:input path="workoutList[${counter}]" placeholder="${w.pace }"
+					<h5 style="text-transform: capitalize">pace</h5>
+					<form:input class="input" path="workoutList[${counter}]" value="${w.pace }"
 						size="10" required="required" />
 					<c:set var="counter" value="${counter + 1}" scope="page" />
 				</div>
 				</c:if>
 				<c:if test="${w.exercise.category.distance}">
 				<div class="col-md-1 text-center">
-					<h5 style="text-transform: capitalize">distance ${w.distance }</h5>
-					<form:input path="workoutList[${counter}]"
-						placeholder="${w.distance }" size="10" required="required" />
+					<h5 style="text-transform: capitalize">distance</h5>
+					<form:input class="input" path="workoutList[${counter}]"
+						value="${w.distance }" size="10" required="required" />
 					<c:set var="counter" value="${counter + 1}" scope="page" />
 				</div>
 				</c:if>
 				<c:if test="${w.exercise.category.incline}">
 				<div class="col-md-1 text-center">
-					<h6 style="text-transform: capitalize">incline ${w.incline }</h6>
-					<form:input path="workoutList[${counter}]"
-						placeholder="${w.incline }" size="10" required="required" />
+					<h6 style="text-transform: capitalize">incline</h6>
+					<form:input class="input" path="workoutList[${counter}]"
+						value="${w.incline }" size="10" required="required" />
 					<c:set var="counter" value="${counter + 1}" scope="page" />
 				</div>
 				</c:if>
 				<c:if test="${w.exercise.category.level}">
 				<div class="col-md-1 text-center">
-					<h5 style="text-transform: capitalize">level ${w.level }</h5>
-					<form:input path="workoutList[${counter}]"
-						placeholder="${w.level }" size="10" required="required" />
+					<h5 style="text-transform: capitalize">level</h5>
+					<form:input class="input" path="workoutList[${counter}]"
+						value="${w.level }" size="10" required="required" />
 					<c:set var="counter" value="${counter + 1}" scope="page" />
 				</div>
 				</c:if>
