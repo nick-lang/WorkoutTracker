@@ -11,15 +11,19 @@ http://rodhammond.info:8080/WorkoutDWP
 ## Future Features
 #### Workouts:
 List workouts
+
 Create customizable workout plans
 
 #### Exercise:
 Add new exercises
+
 Partnering relationship with local fitness orgs
+
 Using fitness API’s to pull new information
 
 #### Nutrition:
 Meal planning
+
 Calorie tracking
 
 ##Stumbling Points
