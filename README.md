@@ -8,6 +8,7 @@ This is our week 9 project for Skill Distillery. Workout Tracker is a persistant
 This project can be found running at:
 
 http://rodhammond.info:8080/WorkoutDWP
+
 http://www.nicklang.io:8080/WorkoutDWP
 
 ## Future Features
