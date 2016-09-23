@@ -6,7 +6,9 @@ Nick Lang
 This is our week 9 project for Skill Distillery. Workout Tracker is a persistant web application that utilizes Spring MVC, JPA, MySQL, and HTML/CSS. Workout Tracker allows a logged in user the ability to track their workouts in a calendar view. Users are also able to edit the stats about their workouts such as weight and reps.
 
 This project can be found running at:
+
 http://rodhammond.info:8080/WorkoutDWP
+http://www.nicklang.io:8080/WorkoutDWP
 
 ## Future Features
 #### Workouts:
