@@ -14,7 +14,7 @@ List workouts
 Create customizable workout plans
 
 #### Exercise:
-Add new exercises 
+Add new exercises
 Partnering relationship with local fitness orgs
 Using fitness API’s to pull new information
 
